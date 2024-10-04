@@ -1,0 +1,4 @@
+assert False
+
+assert(False)
+
