@@ -1,0 +1,6 @@
+recordings
+recordings/*
+
+*.out
+*.o
+
