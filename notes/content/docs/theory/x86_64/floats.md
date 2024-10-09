@@ -169,7 +169,7 @@ OPERATION[p][s|d]
 
 Ну как минимум есть `hadd[p][s|d]` - aka `Horizontal ADD Packed` и дальше `float` / `double`.
 Вот так будет выглядеть `haddps xmm0, xmm1`
-![elbrus](/sems/x86_64/haddp.jpg)
+![elbrus](../../../../sems/x86_64/haddp.jpg)
 
 Команду можно применять саму на себя - `haddps xmm0, xmm0` будет валидной командой.
 
