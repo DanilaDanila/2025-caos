@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ru-ru" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  bash
+  #
+
+
+  bash
+  #
+
+
+  Минутка душнотытерминологии
+  #
+
+
+терминал - (вообще говоря - эмулятор терминала) - окошко, куда вводят команды
+оболочка aka shell - программа-интерпретатор, которая эти команды исполняет
+bash - одна из оболочек (установлена в начале почти везде)
+zsh - ещё одна оболочка (оболочка по умолчанию в macOS)
+
+
+  Из чего состоит команда
+  #
+
+Будет много команд (привыкайте). В общем виде команда выглядит как-то так
+cmd arg1 arg2 arg3
+
+cmd - имя команды
+arg1, arg2, &hellip; - аргументы
+arg0 тоже есть - это имя команды
+
+Почти всегда (об этом сильно потом TODO: добавить ссылку) команда - это название программы. Программы доступные для запуска лежат, например, по пути /bin/. Список всех путей можно посмотреть в переменной окружения PATH">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://example.org/docs/theory/devools/bash/">
+  <meta property="og:site_name" content="caos theory">
+  <meta property="og:title" content="bash">
+  <meta property="og:description" content=" bash # bash # Минутка душнотытерминологии # терминал - (вообще говоря - эмулятор терминала) - окошко, куда вводят команды оболочка aka shell - программа-интерпретатор, которая эти команды исполняет bash - одна из оболочек (установлена в начале почти везде) zsh - ещё одна оболочка (оболочка по умолчанию в macOS) Из чего состоит команда # Будет много команд (привыкайте). В общем виде команда выглядит как-то так
+cmd arg1 arg2 arg3 cmd - имя команды arg1, arg2, … - аргументы arg0 тоже есть - это имя команды Почти всегда (об этом сильно потом TODO: добавить ссылку) команда - это название программы. Программы доступные для запуска лежат, например, по пути /bin/. Список всех путей можно посмотреть в переменной окружения PATH">
+  <meta property="og:locale" content="ru_ru">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>bash | caos theory</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://example.org/docs/theory/devools/bash/">
+<link rel="stylesheet" href="/book.min.3b63b9ecb24b01f1be0df5c6f361b3a2004ab96665227385e0196f67e7607b29.css" integrity="sha256-O2O57LJLAfG&#43;DfXG82GzogBKuWZlInOF4BlvZ&#43;dgeyk=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.93d52fc8b10a24f3802098b98f62975ff2c140cd8aa0310c08e65da210a90f41.js" integrity="sha256-k9UvyLEKJPOAIJi5j2KXX/LBQM2KoDEMCOZdohCpD0E=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>caos theory</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/theory/" class="">Как закрыть курс</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/whoami/" class="">whoami</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/necronomicon/" class="">Некрономикон</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-96321df072730b9a64870c0191c9133b" class="toggle" checked />
+    <label for="section-96321df072730b9a64870c0191c9133b" class="flex justify-between">
+      <a href="/docs/theory/devools/" class="">Инструменты разработки</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/devools/bash/" class="active">bash</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/devools/build/" class="">этапы сборки</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/devools/debugger/" class="">как ловить ошибки</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/devools/make/" class="">автоматизация сборки</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-123d53d4dd188d20ee5174bebd51adc4" class="toggle"  />
+    <label for="section-123d53d4dd188d20ee5174bebd51adc4" class="flex justify-between">
+      <a href="/docs/theory/x86_64/" class="">x86_64 assembler</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/x86_64/floats/" class="">floats</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2ac106c088cac53c4787d657cccdb647" class="toggle"  />
+    <label for="section-2ac106c088cac53c4787d657cccdb647" class="flex justify-between">
+      <a href="/docs/theory/arm/" class="">ARM assembler</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/arm/linaro/" class="">Linaro (а как тестить)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>bash</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#bash-1">bash</a></li>
+    <li><a href="#минутка-душнотытерминологии">Минутка <del>душноты</del>терминологии</a></li>
+    <li><a href="#из-чего-состоит-команда">Из чего состоит команда</a></li>
+    <li><a href="#аргументы">Аргументы</a></li>
+    <li><a href="#как-узнать-что-делает-команда">Как узнать, что делает команда</a></li>
+    <li><a href="#доллар-и-решётка">Доллар и решётка</a></li>
+    <li><a href="#чем-стоит-научиться-пользоваться-сейчас-в-начале-курса">Чем стоит научиться пользоваться сейчас (в начале курса)</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="bash">
+  bash
+  <a class="anchor" href="#bash">#</a>
+</h1>
+<h2 id="bash-1">
+  bash
+  <a class="anchor" href="#bash-1">#</a>
+</h2>
+<h2 id="минутка-душнотытерминологии">
+  Минутка <del>душноты</del>терминологии
+  <a class="anchor" href="#%d0%bc%d0%b8%d0%bd%d1%83%d1%82%d0%ba%d0%b0-%d0%b4%d1%83%d1%88%d0%bd%d0%be%d1%82%d1%8b%d1%82%d0%b5%d1%80%d0%bc%d0%b8%d0%bd%d0%be%d0%bb%d0%be%d0%b3%d0%b8%d0%b8">#</a>
+</h2>
+<ul>
+<li><strong>терминал</strong> - (вообще говоря - эмулятор терминала) - окошко, куда вводят команды</li>
+<li><strong>оболочка</strong> aka <strong>shell</strong> - программа-интерпретатор, которая эти команды исполняет</li>
+<li><strong>bash</strong> - одна из оболочек (установлена в начале почти везде)</li>
+<li><strong>zsh</strong> - ещё одна оболочка (оболочка по умолчанию в macOS)</li>
+</ul>
+<h2 id="из-чего-состоит-команда">
+  Из чего состоит команда
+  <a class="anchor" href="#%d0%b8%d0%b7-%d1%87%d0%b5%d0%b3%d0%be-%d1%81%d0%be%d1%81%d1%82%d0%be%d0%b8%d1%82-%d0%ba%d0%be%d0%bc%d0%b0%d0%bd%d0%b4%d0%b0">#</a>
+</h2>
+<p>Будет много команд (привыкайте). В общем виде команда выглядит как-то так</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cmd arg1 arg2 arg3
+</span></span></code></pre></div><ul>
+<li><code>cmd</code> - имя команды</li>
+<li><code>arg1</code>, <code>arg2</code>, &hellip; - аргументы</li>
+<li><code>arg0</code> тоже есть - это имя команды</li>
+</ul>
+<p>Почти всегда (об этом сильно потом <code>TODO: добавить ссылку</code>) команда - это название программы. Программы доступные для запуска лежат, например, по пути <code>/bin/</code>. Список всех путей можно посмотреть в переменной окружения <code>PATH</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo $PATH
+</span></span></code></pre></div><h2 id="аргументы">
+  Аргументы
+  <a class="anchor" href="#%d0%b0%d1%80%d0%b3%d1%83%d0%bc%d0%b5%d0%bd%d1%82%d1%8b">#</a>
+</h2>
+<p>Чаще всего вместо простого перечисления агрументов будет что-то такое</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat --help
+</span></span></code></pre></div><p>Тогда <code>--help</code> - флаг</p>
+<p>Иногда у флагов есть короткие версии. Чаще всего (если не закончились буквы алфавита), короткая версия - первая буква полной.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python3 --help
+</span></span><span style="display:flex;"><span>python3 -h
+</span></span></code></pre></div><p>Иногда с помощью флагов передаются значения</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>usermod -a -G docker danila
+</span></span></code></pre></div><p><code>-a</code> - флаг</p>
+<p><code>-G</code> - краткая версия <code>--groups</code> - именованный аргумент (ну типа) - после него идет строка-значение</p>
+<p>Или даже с использованием знака <code>=</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/zero of<span style="color:#f92672">=</span>/tmp/foo.dump bs<span style="color:#f92672">=</span>1M count<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>
+</span></span></code></pre></div><p>Это полезно, т.к. позволяет передавать аргументы в произвольном порядке - это удобнее, чем запоминать порядок. Две команды ниже одинаковы</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/zero of<span style="color:#f92672">=</span>/tmp/foo.dump bs<span style="color:#f92672">=</span>1M count<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>dd bs<span style="color:#f92672">=</span>1M count<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> of<span style="color:#f92672">=</span>/tmp/foo.dump <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/zero
+</span></span></code></pre></div><p>И две команды ниже тоже одинаковы</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>psql -h 127.0.0.1 -p <span style="color:#ae81ff">5432</span> -U admin db
+</span></span><span style="display:flex;"><span>psql -p <span style="color:#ae81ff">5432</span> -U admin -h 127.0.0.1 db
+</span></span></code></pre></div><h2 id="как-узнать-что-делает-команда">
+  Как узнать, что делает команда
+  <a class="anchor" href="#%d0%ba%d0%b0%d0%ba-%d1%83%d0%b7%d0%bd%d0%b0%d1%82%d1%8c-%d1%87%d1%82%d0%be-%d0%b4%d0%b5%d0%bb%d0%b0%d0%b5%d1%82-%d0%ba%d0%be%d0%bc%d0%b0%d0%bd%d0%b4%d0%b0">#</a>
+</h2>
+<p>У некоторых программ можно вызвать <code>--help</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat --help
+</span></span></code></pre></div><p>Но флаг не всегда одинаковый&hellip;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>netcat -help
+</span></span></code></pre></div><p>В Unix-like системах есть man-страницы (<code>man-pages</code>). Некоторые команды идут вместе с ними. man-страницы есть для команд, функций из библиотек, системных вызовов, &hellip;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>man cat
+</span></span></code></pre></div><details ><summary>man cat</summary>
+  <div class="markdown-inner">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>danila@archlinux ~<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>$ man cat
+</span></span><span style="display:flex;"><span>CAT<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>                            User Commands                           CAT<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NAME
+</span></span><span style="display:flex;"><span>       cat - concatenate files and print on the standard output
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SYNOPSIS
+</span></span><span style="display:flex;"><span>       cat <span style="color:#f92672">[</span>OPTION<span style="color:#f92672">]</span>... <span style="color:#f92672">[</span>FILE<span style="color:#f92672">]</span>...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DESCRIPTION
+</span></span><span style="display:flex;"><span>       Concatenate FILE<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> to standard output.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       With no FILE, or when FILE is -, read standard input.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       -A, --show-all
+</span></span><span style="display:flex;"><span>              equivalent to -vET
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       -b, --number-nonblank
+</span></span><span style="display:flex;"><span>              number nonempty output lines, overrides -n
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       -e     equivalent to -vE
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       -E, --show-ends
+</span></span><span style="display:flex;"><span>              display $ at end of each line
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       -n, --number
+</span></span><span style="display:flex;"><span>              number all output lines
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       -s, --squeeze-blank
+</span></span><span style="display:flex;"><span>              suppress repeated empty output lines
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       -t     equivalent to -vT
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       -T, --show-tabs
+</span></span><span style="display:flex;"><span>              display TAB characters as ^I
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       -u     <span style="color:#f92672">(</span>ignored<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       -v, --show-nonprinting
+</span></span><span style="display:flex;"><span>              use ^ and M- notation, except <span style="color:#66d9ef">for</span> LFD and TAB
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       --help display this help and exit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       --version
+</span></span><span style="display:flex;"><span>              output version information and exit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>EXAMPLES
+</span></span><span style="display:flex;"><span>       cat f - g
+</span></span><span style="display:flex;"><span>              Output f<span style="color:#e6db74">&#39;s contents, then standard input, then g&#39;</span>s contents.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       cat    Copy standard input to standard output.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>AUTHOR
+</span></span><span style="display:flex;"><span>       Written by Torbjorn Granlund and Richard M. Stallman.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>REPORTING BUGS
+</span></span><span style="display:flex;"><span>       GNU coreutils online help: &lt;https://www.gnu.org/software/coreutils/&gt;
+</span></span><span style="display:flex;"><span>       Report any translation bugs to &lt;https://translationproject.org/team/&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>COPYRIGHT
+</span></span><span style="display:flex;"><span>       Copyright  © <span style="color:#ae81ff">2024</span> Free Software Foundation, Inc.  License GPLv3+: GNU GPL
+</span></span><span style="display:flex;"><span>       version <span style="color:#ae81ff">3</span> or later &lt;https://gnu.org/licenses/gpl.html&gt;.
+</span></span><span style="display:flex;"><span>       This is free software: you are free to change and redistribute it.  There
+</span></span><span style="display:flex;"><span>       is NO WARRANTY, to the extent permitted by law.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SEE ALSO
+</span></span><span style="display:flex;"><span>       tac<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       Full documentation &lt;https://www.gnu.org/software/coreutils/cat&gt;
+</span></span><span style="display:flex;"><span>       or available locally via: info <span style="color:#e6db74">&#39;(coreutils) cat invocation&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>GNU coreutils 9.5                  August <span style="color:#ae81ff">2024</span>                            CAT<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>
+</span></span></code></pre></div>  </div>
+</details>
+<details ><summary>как читать man-страницы</summary>
+  <div class="markdown-inner">
+<p>Ответ можно посмотреть в man-странице команды <code>man</code></p>
+<p>У <code>man</code> есть несколько секций (1-9) в каждой из которых лежат соответствующие страницы.
+<code>exit</code> - доволно простое имя. Существует такая команда - <code>man 1 exit</code>, системный
+вызов - <code>man 2 exit</code>, и функция - <code>man 3 exit</code>.</p>
+<p>Так же сама страница поеделена на разделы - <code>NAME</code>, <code>SYNOPSIS</code>, &hellip; (дальше идите читать man)</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span></span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ man man
+</span></span><span style="display:flex;"><span>MAN<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>                      Manual pager utils                      MAN<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NAME
+</span></span><span style="display:flex;"><span>       man - an interface to the system reference manuals
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SYNOPSIS
+</span></span><span style="display:flex;"><span>       man <span style="color:#f92672">[</span>man options<span style="color:#f92672">]</span> <span style="color:#f92672">[[</span>section<span style="color:#f92672">]</span> page ...<span style="color:#f92672">]</span> ...
+</span></span><span style="display:flex;"><span>       man -k <span style="color:#f92672">[</span>apropos options<span style="color:#f92672">]</span> regexp ...
+</span></span><span style="display:flex;"><span>       man -K <span style="color:#f92672">[</span>man options<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>section<span style="color:#f92672">]</span> term ...
+</span></span><span style="display:flex;"><span>       man -f <span style="color:#f92672">[</span>whatis options<span style="color:#f92672">]</span> page ...
+</span></span><span style="display:flex;"><span>       man -l <span style="color:#f92672">[</span>man options<span style="color:#f92672">]</span> file ...
+</span></span><span style="display:flex;"><span>       man -w|-W <span style="color:#f92672">[</span>man options<span style="color:#f92672">]</span> page ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DESCRIPTION
+</span></span><span style="display:flex;"><span>       man  is the system<span style="color:#960050;background-color:#1e0010">&#39;</span>s manual pager.  Each page argument given to man
+</span></span><span style="display:flex;"><span>       is normally the name of a program, utility or <span style="color:#66d9ef">function</span>.  The manual
+</span></span><span style="display:flex;"><span>       page associated with each of these arguments is <span style="color:#66d9ef">then</span> found and dis‐
+</span></span><span style="display:flex;"><span>       played.  A section, <span style="color:#66d9ef">if</span> provided, will direct man to  look  only  in
+</span></span><span style="display:flex;"><span>       that section of the manual.  The default action is to search in all
+</span></span><span style="display:flex;"><span>       of  the  available  sections following a pre-defined order <span style="color:#f92672">(</span>see DE‐
+</span></span><span style="display:flex;"><span>       FAULTS<span style="color:#f92672">)</span>, and to show only the first page found, even <span style="color:#66d9ef">if</span> page exists
+</span></span><span style="display:flex;"><span>       in several sections.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       The table below shows the section numbers of the manual followed by
+</span></span><span style="display:flex;"><span>       the types of pages they contain.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>       <span style="color:#ae81ff">1</span>   Executable programs or shell commands
+</span></span><span style="display:flex; background-color:#3c3d38"><span>       <span style="color:#ae81ff">2</span>   System calls <span style="color:#f92672">(</span>functions provided by the kernel<span style="color:#f92672">)</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>       <span style="color:#ae81ff">3</span>   Library calls <span style="color:#f92672">(</span>functions within program libraries<span style="color:#f92672">)</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>       <span style="color:#ae81ff">4</span>   Special files <span style="color:#f92672">(</span>usually found in /dev<span style="color:#f92672">)</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>       <span style="color:#ae81ff">5</span>   File formats and conventions, e.g. /etc/passwd
+</span></span><span style="display:flex; background-color:#3c3d38"><span>       <span style="color:#ae81ff">6</span>   Games
+</span></span><span style="display:flex; background-color:#3c3d38"><span>       <span style="color:#ae81ff">7</span>   Miscellaneous <span style="color:#f92672">(</span>including macro packages and conventions<span style="color:#f92672">)</span>,  e.g.
+</span></span><span style="display:flex; background-color:#3c3d38"><span>           man<span style="color:#f92672">(</span>7<span style="color:#f92672">)</span>, groff<span style="color:#f92672">(</span>7<span style="color:#f92672">)</span>, man-pages<span style="color:#f92672">(</span>7<span style="color:#f92672">)</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>       <span style="color:#ae81ff">8</span>   System administration commands <span style="color:#f92672">(</span>usually only <span style="color:#66d9ef">for</span> root<span style="color:#f92672">)</span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>       <span style="color:#ae81ff">9</span>   Kernel routines <span style="color:#f92672">[</span>Non standard<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       A manual page consists of several sections.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       Conventional  section  names include NAME, SYNOPSIS, CONFIGURATION,
+</span></span><span style="display:flex;"><span>       DESCRIPTION, OPTIONS, EXIT STATUS, RETURN VALUE,  ERRORS,  ENVIRON‐
+</span></span><span style="display:flex;"><span>       MENT,  FILES,  VERSIONS,  STANDARDS, NOTES, BUGS, EXAMPLE, AUTHORS,
+</span></span><span style="display:flex;"><span>       and SEE ALSO.</span></span></code></pre></td></tr></table>
+</div>
+</div>
+  </div>
+</details>
+<p>А ещё есть info-страницы. Они содержат больше описания, чем man-страницы</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>info cat
+</span></span></code></pre></div><details ><summary>info cat</summary>
+  <div class="markdown-inner">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>danila@archlinux ~<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>$ info cat
+</span></span><span style="display:flex;"><span>File: coreutils.info,  Node: cat invocation,  Next: tac invocation,  Up: Output of entire files
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>3.1 ‘cat’: Concatenate and write files
+</span></span><span style="display:flex;"><span><span style="color:#f92672">======================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>‘cat’ copies each FILE <span style="color:#f92672">(</span>‘-’ means standard input<span style="color:#f92672">)</span>, or standard input <span style="color:#66d9ef">if</span>
+</span></span><span style="display:flex;"><span>none are given, to standard output.  Synopsis:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>     cat <span style="color:#f92672">[</span>OPTION<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>FILE<span style="color:#f92672">]</span>...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   The program accepts the following options.  Also see *note Common
+</span></span><span style="display:flex;"><span>options::.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>‘-A’
+</span></span><span style="display:flex;"><span>‘--show-all’
+</span></span><span style="display:flex;"><span>     Equivalent to ‘-vET’.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>‘-b’
+</span></span><span style="display:flex;"><span>‘--number-nonblank’
+</span></span><span style="display:flex;"><span>     Number all nonempty output lines, starting with 1.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>‘-e’
+</span></span><span style="display:flex;"><span>     Equivalent to ‘-vE’.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>‘-E’
+</span></span><span style="display:flex;"><span>‘--show-ends’
+</span></span><span style="display:flex;"><span>     Display a ‘$’ after the end of each line.  The ‘<span style="color:#ae81ff">\r\n</span>’ combination
+</span></span><span style="display:flex;"><span>     is shown as ‘^M$’.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>‘-n’
+</span></span><span style="display:flex;"><span>‘--number’
+</span></span><span style="display:flex;"><span>     Number all output lines, starting with 1.  This option is ignored
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">if</span> ‘-b’ is in effect.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>‘-s’
+</span></span><span style="display:flex;"><span>‘--squeeze-blank’
+</span></span><span style="display:flex;"><span>     Suppress repeated adjacent blank lines; output just one empty line
+</span></span><span style="display:flex;"><span>     instead of several.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>‘-t’
+</span></span><span style="display:flex;"><span>     Equivalent to ‘-vT’.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>‘-T’
+</span></span><span style="display:flex;"><span>‘--show-tabs’
+</span></span><span style="display:flex;"><span>     Display TAB characters as ‘^I’.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>‘-u’
+</span></span><span style="display:flex;"><span>     Ignored; <span style="color:#66d9ef">for</span> POSIX compatibility.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>‘-v’
+</span></span><span style="display:flex;"><span>‘--show-nonprinting’
+</span></span><span style="display:flex;"><span>     Display control characters except <span style="color:#66d9ef">for</span> LFD and TAB using ‘^’
+</span></span><span style="display:flex;"><span>     notation and precede characters that have the high bit set with
+</span></span><span style="display:flex;"><span>     ‘M-’.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   On systems like MS-DOS that distinguish between text and binary
+</span></span><span style="display:flex;"><span>files, ‘cat’ normally reads and writes in binary mode.  However, ‘cat’
+</span></span><span style="display:flex;"><span>reads in text mode <span style="color:#66d9ef">if</span> one of the options ‘-bensAE’ is used or <span style="color:#66d9ef">if</span> ‘cat’
+</span></span><span style="display:flex;"><span>is reading from standard input and standard input is a terminal.
+</span></span><span style="display:flex;"><span>Similarly, ‘cat’ writes in text mode <span style="color:#66d9ef">if</span> one of the options ‘-bensAE’ is
+</span></span><span style="display:flex;"><span>used or <span style="color:#66d9ef">if</span> standard output is a terminal.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   An exit status of zero indicates success, and a nonzero value
+</span></span><span style="display:flex;"><span>indicates failure.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   Examples:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e"># Output f&#39;s contents, then standard input, then g&#39;s contents.</span>
+</span></span><span style="display:flex;"><span>     cat f - g
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e"># Copy standard input to standard output.</span>
+</span></span><span style="display:flex;"><span>     cat
+</span></span></code></pre></div>  </div>
+</details>
+<p>И мой любимый <code>tldr</code> - когда вы помните, что делает команда, но не помните, как её правильно вызвать</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tldr tar
+</span></span></code></pre></div><details ><summary>tldr tar</summary>
+  <div class="markdown-inner">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>danila@archlinux ~<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>$ tldr tar                                                            <span style="color:#f92672">[</span>05:39:03<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Archiving utility.
+</span></span><span style="display:flex;"><span>  Often combined with a compression method, such as <span style="color:#e6db74">`</span>gzip<span style="color:#e6db74">`</span> or <span style="color:#e6db74">`</span>bzip2<span style="color:#e6db74">`</span>.
+</span></span><span style="display:flex;"><span>  More information: &lt;https://www.gnu.org/software/tar&gt;.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">[</span>c<span style="color:#f92672">]</span>reate an archive and write it to a <span style="color:#f92672">[</span>f<span style="color:#f92672">]</span>ile:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      tar cf path/to/target.tar path/to/file1 path/to/file2 ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">[</span>c<span style="color:#f92672">]</span>reate a g<span style="color:#f92672">[</span>z<span style="color:#f92672">]</span>ipped archive and write it to a <span style="color:#f92672">[</span>f<span style="color:#f92672">]</span>ile:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      tar czf path/to/target.tar.gz path/to/file1 path/to/file2 ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">[</span>c<span style="color:#f92672">]</span>reate a g<span style="color:#f92672">[</span>z<span style="color:#f92672">]</span>ipped archive from a directory using relative paths:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      tar czf path/to/target.tar.gz --directory<span style="color:#f92672">=</span>path/to/directory .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  E<span style="color:#f92672">[</span>x<span style="color:#f92672">]</span>tract a <span style="color:#f92672">(</span>compressed<span style="color:#f92672">)</span> archive <span style="color:#f92672">[</span>f<span style="color:#f92672">]</span>ile into the current directory <span style="color:#f92672">[</span>v<span style="color:#f92672">]</span>erbosely:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      tar xvf path/to/source.tar<span style="color:#f92672">[</span>.gz|.bz2|.xz<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  E<span style="color:#f92672">[</span>x<span style="color:#f92672">]</span>tract a <span style="color:#f92672">(</span>compressed<span style="color:#f92672">)</span> archive <span style="color:#f92672">[</span>f<span style="color:#f92672">]</span>ile into the target directory:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      tar xf path/to/source.tar<span style="color:#f92672">[</span>.gz|.bz2|.xz<span style="color:#f92672">]</span> --directory<span style="color:#f92672">=</span>path/to/directory
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">[</span>c<span style="color:#f92672">]</span>reate a compressed archive and write it to a <span style="color:#f92672">[</span>f<span style="color:#f92672">]</span>ile, using the file extension to <span style="color:#f92672">[</span>a<span style="color:#f92672">]</span>utomatically determine the compression program:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      tar caf path/to/target.tar.xz path/to/file1 path/to/file2 ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Lis<span style="color:#f92672">[</span>t<span style="color:#f92672">]</span> the contents of a tar <span style="color:#f92672">[</span>f<span style="color:#f92672">]</span>ile <span style="color:#f92672">[</span>v<span style="color:#f92672">]</span>erbosely:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      tar tvf path/to/source.tar
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  E<span style="color:#f92672">[</span>x<span style="color:#f92672">]</span>tract files matching a pattern from an archive <span style="color:#f92672">[</span>f<span style="color:#f92672">]</span>ile:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      tar xf path/to/source.tar --wildcards <span style="color:#e6db74">&#34;*.html&#34;</span>
+</span></span></code></pre></div>  </div>
+</details>
+<h2 id="доллар-и-решётка">
+  Доллар и решётка
+  <a class="anchor" href="#%d0%b4%d0%be%d0%bb%d0%bb%d0%b0%d1%80-%d0%b8-%d1%80%d0%b5%d1%88%d1%91%d1%82%d0%ba%d0%b0">#</a>
+</h2>
+<p>Иногда на сайтах вы будете видеть знаки <code>$</code> или <code>#</code> перед командами</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># usermod -a -G docker danila</span>
+</span></span></code></pre></div><p>или</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cat my_log.txt
+</span></span></code></pre></div><p>Знак <code>#</code> указывает, что команда <a href="https://datatracker.ietf.org/doc/html/rfc2119">должна</a> быть запущена от имени пользователя <code>root</code> (администратор в Unix-системах), <code>$</code> - от обычного пользователя (без прав администратора).</p>
+<p>Выполнить что-нибудь с правами администратора можно с помощью <code>sudo</code>, поэтому знак <code>#</code> я использовать не буду.
+Знак <code>$</code> я постараюсь использовать реже и только чтоб отделить команду от её вывода</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ echo <span style="color:#e6db74">&#34;hello!&#34;</span>
+</span></span><span style="display:flex;"><span>hello!
+</span></span></code></pre></div><h2 id="чем-стоит-научиться-пользоваться-сейчас-в-начале-курса">
+  Чем стоит научиться пользоваться сейчас (в начале курса)
+  <a class="anchor" href="#%d1%87%d0%b5%d0%bc-%d1%81%d1%82%d0%be%d0%b8%d1%82-%d0%bd%d0%b0%d1%83%d1%87%d0%b8%d1%82%d1%8c%d1%81%d1%8f-%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d1%82%d1%8c%d1%81%d1%8f-%d1%81%d0%b5%d0%b9%d1%87%d0%b0%d1%81-%d0%b2-%d0%bd%d0%b0%d1%87%d0%b0%d0%bb%d0%b5-%d0%ba%d1%83%d1%80%d1%81%d0%b0">#</a>
+</h2>
+<p>Для начала работы в терминале этого +-хватит</p>
+<ul>
+<li><code>cd</code></li>
+<li><code>ls</code></li>
+<li><code>echo</code></li>
+<li><code>cat</code></li>
+<li><code>nano</code> ИЛИ <code>vim</code></li>
+<li><code>mkdir</code></li>
+<li><code>touch</code></li>
+<li><code>rm</code></li>
+<li><code>rmdir</code></li>
+<li><code>head</code></li>
+<li><code>tail</code></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#bash-1">bash</a></li>
+    <li><a href="#минутка-душнотытерминологии">Минутка <del>душноты</del>терминологии</a></li>
+    <li><a href="#из-чего-состоит-команда">Из чего состоит команда</a></li>
+    <li><a href="#аргументы">Аргументы</a></li>
+    <li><a href="#как-узнать-что-делает-команда">Как узнать, что делает команда</a></li>
+    <li><a href="#доллар-и-решётка">Доллар и решётка</a></li>
+    <li><a href="#чем-стоит-научиться-пользоваться-сейчас-в-начале-курса">Чем стоит научиться пользоваться сейчас (в начале курса)</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

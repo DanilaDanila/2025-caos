@@ -1,0 +1,117 @@
+<!doctype html><html lang=ru-ru dir=ltr><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  Некрономикон
+  #
+
+Тут содержится список заклинаний, запрещенных к использованию.
+чё?...
+  
+Содержание любого &ldquo;примера&rdquo; с этой страницы в вашем коде может являеться причиной непрохождения код-ревью
+  
+
+
+  общие требования к любому коду
+  #
+
+
+старайтесь писать красиво
+
+почти всегда красиво = кратко
+а ещё почти всегда кратко = читаемо
+
+
+давайте осмысленные имена переменным и функциям
+
+нету однобуквенных названий (не экономьте буквы! они бесплатны)
+имена функций - желательно глагол
+имена переменных - существительное
+общепринятые имена (fd / socket / i / &mldr;) - это круто!
+
+
+избегайте magic_numbers
+
+those who do not believe in %magic will never find it, но у нас тут C
+
+шутка подготовлена любителями python
+
+
+
+
+&mldr;
+
+(список будет пополняться)"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="http://localhost:1313/docs/theory/0-1_necronomicon/"><meta property="og:site_name" content="caos theory"><meta property="og:title" content="Некрономикон"><meta property="og:description" content=" Некрономикон # Тут содержится список заклинаний, запрещенных к использованию.
+чё?... Содержание любого “примера” с этой страницы в вашем коде может являеться причиной непрохождения код-ревью
+общие требования к любому коду # старайтесь писать красиво почти всегда красиво = кратко а ещё почти всегда кратко = читаемо давайте осмысленные имена переменным и функциям нету однобуквенных названий (не экономьте буквы! они бесплатны) имена функций - желательно глагол имена переменных - существительное общепринятые имена (fd / socket / i / …) - это круто! избегайте magic_numbers those who do not believe in %magic will never find it, но у нас тут C шутка подготовлена любителями python … (список будет пополняться)"><meta property="og:locale" content="ru_ru"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Некрономикон | caos theory</title>
+<link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=http://localhost:1313/docs/theory/0-1_necronomicon/><link rel=stylesheet href=/book.min.3b63b9ecb24b01f1be0df5c6f361b3a2004ab96665227385e0196f67e7607b29.css integrity="sha256-O2O57LJLAfG+DfXG82GzogBKuWZlInOF4BlvZ+dgeyk=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.a2fa41966a5e9f1029f2865fde0260fed7e1a33e8b34873915d1badb36db4981.js integrity="sha256-ovpBlmpenxAp8oZf3gJg/tfhoz6LNIc5FdG62zbbSYE=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>caos theory</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/docs/theory/>Как закрыть курс</a><ul><li><a href=/docs/theory/whoami/>whoami</a></li><li><a href=/docs/theory/0-1_necronomicon/ class=active>Некрономикон</a></li><li><a href=/docs/theory/1_devtools/>Инструменты разработки</a></li></ul></li><li class=book-section-flat><span>Shortcodes</span><ul><li><a href=/docs/shortcodes/buttons/>Buttons</a></li><li><a href=/docs/shortcodes/columns/>Columns</a></li><li><a href=/docs/shortcodes/details/>Details</a></li><li><a href=/docs/shortcodes/hints/>Hints</a></li><li><a href=/docs/shortcodes/mermaid/>Mermaid</a></li><li><input type=checkbox id=section-d4c83c0dd655503a3da63d0c6550ed41 class=toggle>
+<label for=section-d4c83c0dd655503a3da63d0c6550ed41 class="flex justify-between"><a href=/docs/shortcodes/section/>Section</a></label><ul><li><a href=/docs/shortcodes/section/first-page/>First Page</a></li><li><a href=/docs/shortcodes/section/second-page/>Second Page</a></li></ul></li><li><a href=/docs/shortcodes/tabs/>Tabs</a></li><li><a href=/docs/shortcodes/katex/>KaTeX</a></li></ul></li></ul><ul><li><a href=/posts/>Blog</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
+</label><strong>Некрономикон</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#общие-требования-к-любому-коду>общие требования к любому коду</a></li><li><a href=#define-ы>define-ы</a><ul><li><a href=#константы>константы</a></li><li><a href=#макросы>Макросы</a></li></ul></li><li><a href=#не-дублируйте-библиотечные-константы>не дублируйте библиотечные константы</a></li><li><a href=#работа-с-файлами>работа с файлами</a></li><li><a href=#ассемблер>ассемблер</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=некрономикон>Некрономикон
+<a class=anchor href=#%d0%bd%d0%b5%d0%ba%d1%80%d0%be%d0%bd%d0%be%d0%bc%d0%b8%d0%ba%d0%be%d0%bd>#</a></h1><p>Тут содержится список заклинаний, запрещенных к использованию.</p><details><summary>чё?...</summary><div class=markdown-inner><p>Содержание любого &ldquo;примера&rdquo; с этой страницы в вашем коде <em>может</em> являеться причиной непрохождения код-ревью</p></div></details><h2 id=общие-требования-к-любому-коду>общие требования к любому коду
+<a class=anchor href=#%d0%be%d0%b1%d1%89%d0%b8%d0%b5-%d1%82%d1%80%d0%b5%d0%b1%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-%d0%ba-%d0%bb%d1%8e%d0%b1%d0%be%d0%bc%d1%83-%d0%ba%d0%be%d0%b4%d1%83>#</a></h2><ul><li>старайтесь писать красиво<ul><li>почти всегда <code>красиво = кратко</code></li><li>а ещё почти всегда <code>кратко = читаемо</code></li></ul></li><li>давайте осмысленные имена переменным и функциям<ul><li>нету однобуквенных названий (не экономьте буквы! они бесплатны)</li><li>имена функций - желательно глагол</li><li>имена переменных - существительное</li><li>общепринятые имена (fd / socket / i / &mldr;) - это круто!</li></ul></li><li>избегайте magic_numbers<ul><li><code>those who do not believe in %magic will never find it</code>, но у нас тут C<ul><li>шутка подготовлена любителями python</li></ul></li></ul></li><li>&mldr;</li></ul><p>(список будет пополняться)</p><h2 id=define-ы>define-ы
+<a class=anchor href=#define-%d1%8b>#</a></h2><p>Просто нет</p><h3 id=константы>константы
+<a class=anchor href=#%d0%ba%d0%be%d0%bd%d1%81%d1%82%d0%b0%d0%bd%d1%82%d1%8b>#</a></h3><p>Да, иногда хочется вынести константу и написать что-то типо такого</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#75715e>#define PI 3.1415926
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>double</span> V <span style=color:#f92672>=</span> <span style=color:#ae81ff>4.0</span> <span style=color:#f92672>/</span> <span style=color:#ae81ff>3.0</span> <span style=color:#f92672>*</span> PI <span style=color:#f92672>*</span> R <span style=color:#f92672>*</span> R <span style=color:#f92672>*</span> R;
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
+</span></span></code></pre></div><p>Но в C существуют константы!) Они и в ошибках компиляции будут выглядеть нормально)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>double</span> PI <span style=color:#f92672>=</span> <span style=color:#ae81ff>3.1419526</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span> () {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>double</span> V <span style=color:#f92672>=</span> <span style=color:#ae81ff>4.0</span> <span style=color:#f92672>/</span> <span style=color:#ae81ff>3.0</span> <span style=color:#f92672>*</span> PI <span style=color:#f92672>*</span> R <span style=color:#f92672>*</span> R <span style=color:#f92672>*</span> R;
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
+</span></span></code></pre></div><p>Для интов есть enum-ы - используйте их</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#66d9ef>enum</span> {
+</span></span><span style=display:flex><span>    FLAG_1 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>&lt;&lt;</span> <span style=color:#ae81ff>0</span>,
+</span></span><span style=display:flex><span>    FLAG_2 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>&lt;&lt;</span> <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    FLAG_3 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>&lt;&lt;</span> <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    FLAG_4 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>&lt;&lt;</span> <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    BUFFER_SIZE <span style=color:#f92672>=</span> <span style=color:#ae81ff>512</span>,
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> flags <span style=color:#f92672>=</span> FLAG_1 <span style=color:#f92672>|</span> FLAG_2;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>char</span> buffer[BUFFER_SIZE];
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=макросы>Макросы
+<a class=anchor href=#%d0%bc%d0%b0%d0%ba%d1%80%d0%be%d1%81%d1%8b>#</a></h3><p>У макросов есть неприятный сайд-эфеект - это подстановка текста.
+Конкретно тут <code>++x</code> будет выполнен дважды.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdio.h&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#define MAX(a, b) (((a) &gt;= (b)) ? (a) : (b))
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> x <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> y <span style=color:#f92672>=</span> <span style=color:#ae81ff>11</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> max_value <span style=color:#f92672>=</span> <span style=color:#a6e22e>MAX</span>(<span style=color:#f92672>++</span>x, y);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>printf</span>(
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;x = %d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;y = %d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;max_value = %d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>,
+</span></span><span style=display:flex><span>        x, y, max_value
+</span></span><span style=display:flex><span>    );
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><details><summary>какой будет вывод?</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ gcc main.c
+</span></span><span style=display:flex><span>$ ./a.aout
+</span></span><span style=display:flex><span>x <span style=color:#f92672>=</span> <span style=color:#ae81ff>12</span>
+</span></span><span style=display:flex><span>y <span style=color:#f92672>=</span> <span style=color:#ae81ff>11</span>
+</span></span><span style=display:flex><span>max_value <span style=color:#f92672>=</span> <span style=color:#ae81ff>12</span>
+</span></span></code></pre></div></div></details><h2 id=не-дублируйте-библиотечные-константы>не дублируйте библиотечные константы
+<a class=anchor href=#%d0%bd%d0%b5-%d0%b4%d1%83%d0%b1%d0%bb%d0%b8%d1%80%d1%83%d0%b9%d1%82%d0%b5-%d0%b1%d0%b8%d0%b1%d0%bb%d0%b8%d0%be%d1%82%d0%b5%d1%87%d0%bd%d1%8b%d0%b5-%d0%ba%d0%be%d0%bd%d1%81%d1%82%d0%b0%d0%bd%d1%82%d1%8b>#</a></h2><p>Если вам нужна константа - погуглите!) Возможно она уже определена.
+Правильнее будет её переиспользовать, т.к.</p><ul><li>константа с таким именем определена не только у вас))</li><li>константы вида PATH_MAX могут отличаться от системы к системе</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;linux/limits.h&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>PATH_MAX <span style=color:#75715e>// chars in a path name INCLUDING NULL
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;unistd.h&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>STDIN_FILENO
+</span></span><span style=display:flex><span>STDOUT_FOLENO
+</span></span><span style=display:flex><span>STDERR_FILENO
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ... //
+</span></span></span></code></pre></div><h2 id=работа-с-файлами>работа с файлами
+<a class=anchor href=#%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%b0-%d1%81-%d1%84%d0%b0%d0%b9%d0%bb%d0%b0%d0%bc%d0%b8>#</a></h2><p>Курс посвящен работе с ядром, так что используйте интерфейс ядра.</p><p>Работа с файлами <a href=https://datatracker.ietf.org/doc/html/rfc2119>должна</a> происходить через файловые дескрипторы. Код, содержащий <code>FILE*</code> код-ревью не пройдет.</p><h2 id=ассемблер>ассемблер
+<a class=anchor href=#%d0%b0%d1%81%d1%81%d0%b5%d0%bc%d0%b1%d0%bb%d0%b5%d1%80>#</a></h2></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#общие-требования-к-любому-коду>общие требования к любому коду</a></li><li><a href=#define-ы>define-ы</a><ul><li><a href=#константы>константы</a></li><li><a href=#макросы>Макросы</a></li></ul></li><li><a href=#не-дублируйте-библиотечные-константы>не дублируйте библиотечные константы</a></li><li><a href=#работа-с-файлами>работа с файлами</a></li><li><a href=#ассемблер>ассемблер</a></li></ul></nav></div></aside></main></body></html>
