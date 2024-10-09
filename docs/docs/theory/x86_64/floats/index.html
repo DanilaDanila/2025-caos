@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ru-ru" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Floats
+  #
+
+В курсе не рассматриваются команды для старого FPU (который fmov, fadd &hellip;), поэтому мы его тоже скипнем.
+Раньше особого смысла в обработке дробных чисел на офисных машинках не было.
+(тем более что деньги так считать нельзя).
+Поэтому FPU (Floating point Processing Unit) стал поставлятся не сразу, а в начале вообще был
+отдельным &ldquo;камнем&rdquo;.
+Сейчас это просто один из модулей центрального процессора.
+
+  SSE (Streaming SIMD Extensions)
+  #
+
+В x86_64 есть большие регистры, через которые можно работать с числами с плавающей точкой.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://daniladanila.github.io/docs/theory/x86_64/floats/">
+  <meta property="og:site_name" content="caos theory">
+  <meta property="og:title" content="floats">
+  <meta property="og:description" content=" Floats # В курсе не рассматриваются команды для старого FPU (который fmov, fadd …), поэтому мы его тоже скипнем.
+Раньше особого смысла в обработке дробных чисел на офисных машинках не было. (тем более что деньги так считать нельзя).
+Поэтому FPU (Floating point Processing Unit) стал поставлятся не сразу, а в начале вообще был отдельным “камнем”.
+Сейчас это просто один из модулей центрального процессора.
+SSE (Streaming SIMD Extensions) # В x86_64 есть большие регистры, через которые можно работать с числами с плавающей точкой.">
+  <meta property="og:locale" content="ru_ru">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>floats | caos theory</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://daniladanila.github.io/docs/theory/x86_64/floats/">
+<link rel="stylesheet" href="/book.min.3b63b9ecb24b01f1be0df5c6f361b3a2004ab96665227385e0196f67e7607b29.css" integrity="sha256-O2O57LJLAfG&#43;DfXG82GzogBKuWZlInOF4BlvZ&#43;dgeyk=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.93d52fc8b10a24f3802098b98f62975ff2c140cd8aa0310c08e65da210a90f41.js" integrity="sha256-k9UvyLEKJPOAIJi5j2KXX/LBQM2KoDEMCOZdohCpD0E=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>caos theory</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/theory/" class="">Как закрыть курс</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/whoami/" class="">whoami</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/necronomicon/" class="">Некрономикон</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-96321df072730b9a64870c0191c9133b" class="toggle"  />
+    <label for="section-96321df072730b9a64870c0191c9133b" class="flex justify-between">
+      <a href="/docs/theory/devools/" class="">Инструменты разработки</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/devools/bash/" class="">bash</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/devools/build/" class="">этапы сборки</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/devools/debugger/" class="">как ловить ошибки</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/devools/make/" class="">автоматизация сборки</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-123d53d4dd188d20ee5174bebd51adc4" class="toggle" checked />
+    <label for="section-123d53d4dd188d20ee5174bebd51adc4" class="flex justify-between">
+      <a href="/docs/theory/x86_64/" class="">x86_64 assembler</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/x86_64/floats/" class="active">floats</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2ac106c088cac53c4787d657cccdb647" class="toggle"  />
+    <label for="section-2ac106c088cac53c4787d657cccdb647" class="flex justify-between">
+      <a href="/docs/theory/arm/" class="">ARM assembler</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/arm/linaro/" class="">Linaro (а как тестить)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>floats</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#sse-streaming-simd-extensions">SSE (Streaming SIMD Extensions)</a></li>
+    <li><a href="#just-floats-doubles">Just floats (doubles)</a>
+      <ul>
+        <li><a href="#single-single-vs-single-double">single single VS single double</a></li>
+        <li><a href="#арифметические-операции">арифметические операции</a></li>
+      </ul>
+    </li>
+    <li><a href="#simd">SIMD</a>
+      <ul>
+        <li><a href="#работа-с-памятью">Работа с памятью</a></li>
+        <li><a href="#арифметика">Арифметика</a></li>
+        <li><a href="#horizontal-add">Horizontal add</a></li>
+        <li><a href="#shuffle">Shuffle</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="floats">
+  Floats
+  <a class="anchor" href="#floats">#</a>
+</h1>
+<p>В курсе не рассматриваются команды для старого <code>FPU</code> (который <code>fmov</code>, <code>fadd</code> &hellip;), поэтому мы его тоже скипнем.</p>
+<p>Раньше особого смысла в обработке дробных чисел на офисных машинках не было.
+(тем более что деньги так считать нельзя).</p>
+<p>Поэтому <code>FPU</code> (Floating point Processing Unit) стал поставлятся не сразу, а в начале вообще был
+отдельным &ldquo;камнем&rdquo;.</p>
+<p>Сейчас это просто один из модулей центрального процессора.</p>
+<h2 id="sse-streaming-simd-extensions">
+  SSE (Streaming SIMD Extensions)
+  <a class="anchor" href="#sse-streaming-simd-extensions">#</a>
+</h2>
+<p>В x86_64 есть большие регистры, через которые можно работать с числами с плавающей точкой.</p>
+<ul>
+<li><code>xmm0</code>, <code>xmm1</code>, &hellip; <code>xmm15</code> - 128bit регистры</li>
+</ul>
+<p>Ну и дальше снова понесло</p>
+<ul>
+<li><code>ymm1</code>, <code>ymm2</code>, &hellip; <code>ymm15</code> - 256bit регистры (нижняя половина совпадает с <code>xmmN</code>)</li>
+<li><code>zmm1</code>, <code>zmm2</code>, &hellip; <code>zmm15</code> - 512bit регистры (нижняя половина совпадает с <code>ymmN</code>)</li>
+</ul>
+<p><code>zmmN</code> поддерживаются не везде и используются не всеми
+(так что в домашках <a href="https://datatracker.ietf.org/doc/html/rfc2119">можете</a> на них забить).</p>
+<p>Для работы с <code>SSE</code> регистрами есть свой набор команд.</p>
+<h2 id="just-floats-doubles">
+  Just floats (doubles)
+  <a class="anchor" href="#just-floats-doubles">#</a>
+</h2>
+<p>Давайте пока забудем про размер в 128bit и про <code>SIMD</code> в <code>SSE</code> и поговорим просто про работу с &ldquo;одним&rdquo; числом.</p>
+<h3 id="single-single-vs-single-double">
+  single single VS single double
+  <a class="anchor" href="#single-single-vs-single-double">#</a>
+</h3>
+<p>Пока будем смотреть только на суффиксы <code>sd</code> и <code>ss</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span>   <span style="color:#a6e22e">movss</span> <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// |  |`- Single - aka float
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// |   `- Single - работаем с одним числом
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// `----- mov    - операнд
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">movsd</span> <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// |  |`- Double - aka double
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// |   `- Single - работаем с одним числом
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// `----- mov    - операнд
+</span></span></span></code></pre></div><p>Т.е. при работе, например, с <code>xmm0</code> при загрузке из памяти <code>movss</code> заполнит только младшие 32bit регистра.</p>
+<h3 id="арифметические-операции">
+  арифметические операции
+  <a class="anchor" href="#%d0%b0%d1%80%d0%b8%d1%84%d0%bc%d0%b5%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b8%d0%b5-%d0%be%d0%bf%d0%b5%d1%80%d0%b0%d1%86%d0%b8%d0%b8">#</a>
+</h3>
+<p>Ну тут все просто - ловите таблицу</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">addsd</span>   <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST += SRC, double
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">addss</span>   <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST += SRC, float
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">subsd</span>   <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST -= SRC, double
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">subss</span>   <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST -= SRC, float
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">mulsd</span>   <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST *= SRC, double
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">mulss</span>   <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST *= SRC, float
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">divsd</span>   <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST /= SRC, double
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">divss</span>   <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST /= SRC, float
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">sqrtsd</span>  <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST = sqrt(SRC), double
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">sqrtss</span>  <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST = sqrt(SRC), float
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">maxsd</span>   <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST = max(DST, SRC), double
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">maxss</span>   <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST = max(DST, SRC), float
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">minsd</span>   <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST = min(DST, SRC), double
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">minss</span>   <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>   <span style="color:#75715e">// DST = min(DST, SRC), float
+</span></span></span></code></pre></div><p>Добавилась пара новых команд (<code>min</code>, <code>max</code>, <code>sqrt</code>).
+И есть деление на <code>float</code> и <code>double</code>, которые разобрали выше.</p>
+<p>Ещё две группы команд (не арифметика, но +-рядом) - <code>преобразование</code> в int и обратно</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">cvtsd2si</span> <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>  <span style="color:#75715e">// double -&gt; int
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">cvtsi2sd</span> <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>  <span style="color:#75715e">// int -&gt; double
+</span></span></span></code></pre></div><p>(для float додумайте сами)))</p>
+<p>И отдельно сравнение</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">comisd</span>  <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>  <span style="color:#75715e">// для double
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">comiss</span>  <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>  <span style="color:#75715e">// для float
+</span></span></span></code></pre></div><h4 id="про-сравнение-float-ов">
+  Про сравнение float-ов
+  <a class="anchor" href="#%d0%bf%d1%80%d0%be-%d1%81%d1%80%d0%b0%d0%b2%d0%bd%d0%b5%d0%bd%d0%b8%d0%b5-float-%d0%be%d0%b2">#</a>
+</h4>
+<p>Наверное вам говорили, что проверять равенство <code>float</code>-ов напрямую нельзя, а нужно сравнивать модуль разности.
+Это не совсем так. <strong>Одинаковые арифметические действия дадут одинаковый результат</strong>.
+Поэтому сравнение <code>float</code>-ов используя <code>==</code> не лишено смысла.</p>
+<p>Но если вы приближенно считаете что-нибудь как-то так</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> current_value <span style="color:#f92672">=</span> ...;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> prev_value <span style="color:#f92672">=</span> ...;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// --- //
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (current_value <span style="color:#f92672">!=</span> prev_value) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> new_value <span style="color:#f92672">=</span> <span style="color:#a6e22e">do_next_iteration</span>(prev_value, current_value);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    prev_value <span style="color:#f92672">=</span> current_value;
+</span></span><span style="display:flex;"><span>    current_value <span style="color:#f92672">=</span> prev_value;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>то вы сравниваете так зря)
+Классический пример с прибавлением <code>0.01</code> в цикле <code>for</code>, пока не получим <code>1</code> тоже никто не отменял.
+<strong>Если последовательность сходится к X на N-ом шаге, это не значит, что вы получите X</strong></p>
+<p>А ещё иногда всплявают подводные камни, дают вам пару пинков и уходят обратно.
+В &ldquo;старом&rdquo; <code>FPU</code> регистры для работы с <code>float</code>-ами были(да и есть) <strong>внимание!</strong> 80bit (<code>SSE</code> регистры появились сильно позже).
+Из этого следует, что их невозможно без потерь сохранить в 64bit-а.
+Отсюда получаем один из самых древних и болючих багов в <code>gcc</code> (не думали же вы, что там багов нет?)) - <a href="https://gcc.gnu.org/bugzilla/show_bug.cgi?id=323">баг 323</a>.
+Кому интересно - вот <a href="https://habr.com/ru/articles/754730/">статья на habr</a>.</p>
+<h2 id="simd">
+  SIMD
+  <a class="anchor" href="#simd">#</a>
+</h2>
+<p>Время параллелить!
+Время использовать все 128bit <code>xmm0</code>!</p>
+<p>Размер <code>float</code> - 32bit, а <code>double</code> - 64bit. Путём несложных рассчетов получаем, что в <code>xmm0</code> влазит 4 <code>float</code> или 2 <code>double</code>.
+И вот как раз с этими числами можно работать параллельно.</p>
+<p>Для такой работы вместо <code>single</code> (выше) используется <code>packed</code>.</p>
+<h3 id="работа-с-памятью">
+  Работа с памятью
+  <a class="anchor" href="#%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%b0-%d1%81-%d0%bf%d0%b0%d0%bc%d1%8f%d1%82%d1%8c%d1%8e">#</a>
+</h3>
+<p>Снова куча страшных суфиксов</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">mov</span>[<span style="color:#66d9ef">ap</span><span style="color:#960050;background-color:#1e0010">|</span><span style="color:#66d9ef">up</span>][<span style="color:#66d9ef">s</span><span style="color:#960050;background-color:#1e0010">|</span><span style="color:#66d9ef">d</span>] <span style="color:#66d9ef">DST</span>, <span style="color:#66d9ef">SRC</span>
+</span></span></code></pre></div><ul>
+<li>выравнивание по 16bit
+<ul>
+<li><code>ap</code> - <code>Aligned Packed</code></li>
+<li><code>up</code> - <code>Unaligned Packed</code> (выравнивания нет)</li>
+</ul>
+</li>
+<li><code>float</code> / <code>double</code>
+<ul>
+<li><code>s</code> - <code>Single</code> aka <code>float</code></li>
+<li><code>d</code> - <code>Double</code> aka <code>double</code></li>
+</ul>
+</li>
+</ul>
+<p>Команды с выравниванием работают быстрее.
+И компилятор (при выделении памяти под массивы) следит за выравниванием.</p>
+<h3 id="арифметика">
+  Арифметика
+  <a class="anchor" href="#%d0%b0%d1%80%d0%b8%d1%84%d0%bc%d0%b5%d1%82%d0%b8%d0%ba%d0%b0">#</a>
+</h3>
+<p>Тут все чуть проще</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">OPERATION</span>[<span style="color:#66d9ef">p</span>][<span style="color:#66d9ef">s</span><span style="color:#960050;background-color:#1e0010">|</span><span style="color:#66d9ef">d</span>]
+</span></span></code></pre></div><ul>
+<li><code>p</code> - <code>Packed</code></li>
+<li><code>float</code> / <code>double</code>
+<ul>
+<li><code>s</code> - <code>Single</code> aka <code>float</code></li>
+<li><code>d</code> - <code>Double</code> aka <code>double</code></li>
+</ul>
+</li>
+</ul>
+<p>Ну т.е. <code>mulpd xmm0, xmm1</code> - это мы попарно перемножаем <code>double</code>-ы в <code>xmm0</code> и <code>xmm1</code> и сохраняем результат в <code>xmm0</code></p>
+<h3 id="horizontal-add">
+  Horizontal add
+  <a class="anchor" href="#horizontal-add">#</a>
+</h3>
+<p>Окей&hellip; А что если я хочу 2 <code>double</code> (4 <code>float</code>) сложить внутри одного регистра?</p>
+<p>Ну как минимум есть <code>hadd[p][s|d]</code> - aka <code>Horizontal ADD Packed</code> и дальше <code>float</code> / <code>double</code>.
+Вот так будет выглядеть <code>haddps xmm0, xmm1</code>
+<img src="/sems/x86_64/haddp.jpg" alt="elbrus" /></p>
+<p>Команду можно применять саму на себя - <code>haddps xmm0, xmm0</code> будет валидной командой.</p>
+<h3 id="shuffle">
+  Shuffle
+  <a class="anchor" href="#shuffle">#</a>
+</h3>
+<p>И совсем жуткая жуть - <code>shufps</code> (и <code>shufpd</code>)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">shufpd</span> <span style="color:#66d9ef">xmm0</span>, <span style="color:#66d9ef">xmm1</span>, <span style="color:#ae81ff">11100100</span><span style="color:#66d9ef">b</span>
+</span></span></code></pre></div><p>Выполняет перестановĸу элементов из исходных регистров и записывает в регистр назначения.
+Перестановка задается числом (байтом) - третий аргумент. В бинарном виде удобнее.</p>
+<p>+-все бъяснения страшные (это плохо).</p>
+<p>В домашках вам не встретится (это хорошо).</p>
+<p>На лекции было хорошее объяснение, поэтому я его позаимствую))
+На псевдокоде будет как-то так</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>shufps xmm0, xmm1, <span style="color:#960050;background-color:#1e0010">#</span>mask
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* Каждая пара бит задаёт число от 0 до 3.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Это id ячейки (числа), которое нужно выбрать
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>XMM0[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">select</span>(XMM0, (mask <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0</span>b00000011) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>XMM0[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">select</span>(XMM0, (mask <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0</span>b00001100) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>XMM0[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">select</span>(XMM1, (mask <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0</span>b00110000) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>XMM0[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">select</span>(XMM1, (mask <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0</span>b11000000) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">6</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">select</span>(XMM, idx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> XMM[idx]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#sse-streaming-simd-extensions">SSE (Streaming SIMD Extensions)</a></li>
+    <li><a href="#just-floats-doubles">Just floats (doubles)</a>
+      <ul>
+        <li><a href="#single-single-vs-single-double">single single VS single double</a></li>
+        <li><a href="#арифметические-операции">арифметические операции</a></li>
+      </ul>
+    </li>
+    <li><a href="#simd">SIMD</a>
+      <ul>
+        <li><a href="#работа-с-памятью">Работа с памятью</a></li>
+        <li><a href="#арифметика">Арифметика</a></li>
+        <li><a href="#horizontal-add">Horizontal add</a></li>
+        <li><a href="#shuffle">Shuffle</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

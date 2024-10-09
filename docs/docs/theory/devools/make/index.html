@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ru-ru" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Автоматизация сборки
+  #
+
+Ну а теперь, finally, про то, как собирать проекты!
+
+  Как собирать проекты
+  #
+
+
+Окей хорошо&hellip; У меня есть куча файлов. Что с ними делать то?
+
+Чтоб была какая-нибудь конкретика, давайте определимся с проектом, который
+сделает вас супер богатым
+$ tree bitcoin_cracker
+bitcoin_cracker
+├── encription.c
+├── encription.h
+├── hashlib.c
+├── hashlib.h
+├── main.c
+├── small_math.c
+└── small_math.h
+При этом давайте допустим, что
+
+hashlib и encription оба используют small_math.
+main использует только hashlib и encription.
+
+
+  Зависимости
+  #
+
+В .h-файлах находятся объявления функций и констант. В .c содержатся их
+определения (да, взучит криво - гуглите &ldquo;declaration vs definition&rdquo;).
+Если нет - надо рефакторить. Такое го.. месиво собрать будет сложно&hellip;">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://daniladanila.github.io/docs/theory/devools/make/">
+  <meta property="og:site_name" content="caos theory">
+  <meta property="og:title" content="автоматизация сборки">
+  <meta property="og:description" content=" Автоматизация сборки # Ну а теперь, finally, про то, как собирать проекты!
+Как собирать проекты # Окей хорошо… У меня есть куча файлов. Что с ними делать то?
+Чтоб была какая-нибудь конкретика, давайте определимся с проектом, который сделает вас супер богатым
+$ tree bitcoin_cracker bitcoin_cracker ├── encription.c ├── encription.h ├── hashlib.c ├── hashlib.h ├── main.c ├── small_math.c └── small_math.h При этом давайте допустим, что
+hashlib и encription оба используют small_math. main использует только hashlib и encription. Зависимости # В .h-файлах находятся объявления функций и констант. В .c содержатся их определения (да, взучит криво - гуглите “declaration vs definition”). Если нет - надо рефакторить. Такое го.. месиво собрать будет сложно…">
+  <meta property="og:locale" content="ru_ru">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>автоматизация сборки | caos theory</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://daniladanila.github.io/docs/theory/devools/make/">
+<link rel="stylesheet" href="/book.min.3b63b9ecb24b01f1be0df5c6f361b3a2004ab96665227385e0196f67e7607b29.css" integrity="sha256-O2O57LJLAfG&#43;DfXG82GzogBKuWZlInOF4BlvZ&#43;dgeyk=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.93d52fc8b10a24f3802098b98f62975ff2c140cd8aa0310c08e65da210a90f41.js" integrity="sha256-k9UvyLEKJPOAIJi5j2KXX/LBQM2KoDEMCOZdohCpD0E=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>caos theory</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/theory/" class="">Как закрыть курс</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/whoami/" class="">whoami</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/necronomicon/" class="">Некрономикон</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-96321df072730b9a64870c0191c9133b" class="toggle" checked />
+    <label for="section-96321df072730b9a64870c0191c9133b" class="flex justify-between">
+      <a href="/docs/theory/devools/" class="">Инструменты разработки</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/devools/bash/" class="">bash</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/devools/build/" class="">этапы сборки</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/devools/debugger/" class="">как ловить ошибки</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/devools/make/" class="active">автоматизация сборки</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-123d53d4dd188d20ee5174bebd51adc4" class="toggle"  />
+    <label for="section-123d53d4dd188d20ee5174bebd51adc4" class="flex justify-between">
+      <a href="/docs/theory/x86_64/" class="">x86_64 assembler</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/x86_64/floats/" class="">floats</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2ac106c088cac53c4787d657cccdb647" class="toggle"  />
+    <label for="section-2ac106c088cac53c4787d657cccdb647" class="flex justify-between">
+      <a href="/docs/theory/arm/" class="">ARM assembler</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/theory/arm/linaro/" class="">Linaro (а как тестить)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>автоматизация сборки</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#как-собирать-проекты">Как собирать проекты</a>
+      <ul>
+        <li><a href="#зависимости">Зависимости</a></li>
+        <li><a href="#собираем-все-ручками">Собираем все ручками</a></li>
+      </ul>
+    </li>
+    <li><a href="#sh-или-как-не-писать-ручками">.sh или как не писать ручками</a></li>
+    <li><a href="#make-или-как-не-пересобирать-все-каждый-раз">make или как не пересобирать все каждый раз</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#cmake-или-как-генерировать-makefile">cmake или как генерировать Makefile</a></li>
+    <li><a href="#слава-opensource">Слава OpenSource!</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="автоматизация-сборки">
+  Автоматизация сборки
+  <a class="anchor" href="#%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-%d1%81%d0%b1%d0%be%d1%80%d0%ba%d0%b8">#</a>
+</h1>
+<p>Ну а теперь, finally, про то, как собирать проекты!</p>
+<h2 id="как-собирать-проекты">
+  Как собирать проекты
+  <a class="anchor" href="#%d0%ba%d0%b0%d0%ba-%d1%81%d0%be%d0%b1%d0%b8%d1%80%d0%b0%d1%82%d1%8c-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d1%8b">#</a>
+</h2>
+<blockquote>
+<p>Окей хорошо&hellip; У меня есть куча файлов. Что с ними делать то?</p>
+</blockquote>
+<p>Чтоб была какая-нибудь конкретика, давайте определимся с проектом, который
+сделает вас супер богатым</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ tree bitcoin_cracker
+</span></span><span style="display:flex;"><span>bitcoin_cracker
+</span></span><span style="display:flex;"><span>├── encription.c
+</span></span><span style="display:flex;"><span>├── encription.h
+</span></span><span style="display:flex;"><span>├── hashlib.c
+</span></span><span style="display:flex;"><span>├── hashlib.h
+</span></span><span style="display:flex;"><span>├── main.c
+</span></span><span style="display:flex;"><span>├── small_math.c
+</span></span><span style="display:flex;"><span>└── small_math.h
+</span></span></code></pre></div><p>При этом давайте допустим, что</p>
+<ul>
+<li><code>hashlib</code> и <code>encription</code> оба используют <code>small_math</code>.</li>
+<li><code>main</code> использует только <code>hashlib</code> и <code>encription</code>.</li>
+</ul>
+<h3 id="зависимости">
+  Зависимости
+  <a class="anchor" href="#%d0%b7%d0%b0%d0%b2%d0%b8%d1%81%d0%b8%d0%bc%d0%be%d1%81%d1%82%d0%b8">#</a>
+</h3>
+<p>В <code>.h</code>-файлах находятся объявления функций и констант. В <code>.c</code> содержатся их
+определения (да, взучит криво - гуглите &ldquo;declaration vs definition&rdquo;).
+Если нет - надо рефакторить. Такое <del>го..</del> месиво собрать будет сложно&hellip;</p>
+<p>Дальше стоит проверить зависимости.
+Помните этапы сборки? Вплоть до этапа линковки мы собираем <strong>отдельно каждый файлик</strong>.
+Чуть честнее - мы собираем только <code>.c</code>-файлы, т.к. там содержатся определения функций.
+<a href="https://datatracker.ietf.org/doc/html/rfc2119"><strong>Желательно не</strong></a> инклудить один <code>.c</code>-файл в другой (поменьше <code>#include &lt;smth.c&gt;</code> пожалуйста).
+Это неочевидное поведение и bad-pattern.</p>
+<p>Кратко правила хорошего тона для зависимостей:</p>
+<ul>
+<li>объявления - в <code>.h</code> файлах</li>
+<li>реализация для <code>somelibname.h</code> - в <code>somelibname.c</code>
+<ul>
+<li>строго говоря, никто не мешает разные функции из <code>somelibname.h</code>
+реализовывать в разных <code>.c</code> файлах; но не могу придумать, когда это полезно</li>
+</ul>
+</li>
+<li>в <code>.c</code> файликах инклудьте только <code>.h</code> файлики</li>
+<li>в <code>.h</code> файлика инклудьте только <code>.h</code> файлики (а желательно - <strong>ничего</strong>)</li>
+</ul>
+<p>Наверное стоит сказать и про header-only библиотеки - это когда вы всю реализацию
+пишете в <code>.h</code>-файлик.
+Минусы очевидны, но если библиотека маленькая - то это вполне нормальная идея.</p>
+<p>Допустим что вы причесали зависимости и теперь они выглядят как-то так:
+
+
+<script src="/mermaid.min.js"></script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<pre class="mermaid">
+graph LR;
+    small_math.c --> small_math.h
+    hashlib.c --> hashlib.h
+    hashlib.c --> small_math.h
+    encription.c --> encriptoin.h
+    encription.c --> small_math.h
+
+    main.c --> hashlib.h
+    main.c --> encription.h
+</pre>
+
+(стрелочка вида <code>a --&gt; b</code> значит, что в <code>a</code> есть строчка <code>#include &lt;b&gt;</code>)</p>
+<h3 id="собираем-все-ручками">
+  Собираем все ручками
+  <a class="anchor" href="#%d1%81%d0%be%d0%b1%d0%b8%d1%80%d0%b0%d0%b5%d0%bc-%d0%b2%d1%81%d0%b5-%d1%80%d1%83%d1%87%d0%ba%d0%b0%d0%bc%d0%b8">#</a>
+</h3>
+<p>Нам нужно собрать три наши библиотеки и код программы в оъектные файлы.
+А потом натравить на это линкер.</p>
+<p>И это даже будет работать</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gcc -c small_math.c
+</span></span><span style="display:flex;"><span>gcc -c hashlib.c
+</span></span><span style="display:flex;"><span>gcc -c encription.c
+</span></span><span style="display:flex;"><span>gcc -c main.c
+</span></span><span style="display:flex;"><span>gcc small_math.o hashlib.o encription.o main.o -o bitcoin_cracker
+</span></span></code></pre></div><p>Да, <code>.h</code> файлики не передаются <code>gcc</code> как параметры - они подставляются <code>.c</code> файлики препроцессором
+во время сборки.</p>
+<h2 id="sh-или-как-не-писать-ручками">
+  .sh или как не писать ручками
+  <a class="anchor" href="#sh-%d0%b8%d0%bb%d0%b8-%d0%ba%d0%b0%d0%ba-%d0%bd%d0%b5-%d0%bf%d0%b8%d1%81%d0%b0%d1%82%d1%8c-%d1%80%d1%83%d1%87%d0%ba%d0%b0%d0%bc%d0%b8">#</a>
+</h2>
+<p>Первое что приходит на ум, когда не хочется писать все ручками - запихать всё в скрипт.
+Идея неплохая - давайте сделаем.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cat &gt; build_all.sh <span style="color:#e6db74">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">gcc -c small_math.c
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">gcc -c hashlib.c
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">gcc -c encription.c
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">gcc -c main.c
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">gcc small_math.o hashlib.o encription.o main.o -o bitcoin_cracker
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>$ cat build_all.sh
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>gcc -c small_math.c
+</span></span><span style="display:flex;"><span>gcc -c hashlib.c
+</span></span><span style="display:flex;"><span>gcc -c encription.c
+</span></span><span style="display:flex;"><span>gcc -c main.c
+</span></span><span style="display:flex;"><span>gcc small_math.o hashlib.o encription.o main.o -o bitcoin_cracker
+</span></span></code></pre></div><p>Про <code>EOF</code> как-нибудь потом (<code>TODO: вставить ссылку</code>).
+Про то, что такое <code>#!/bin/bash</code> тоже потом (<code>TODO: вставить ту же ссылку</code>).</p>
+<p>Дальше надо дать файлику права на исполнение (<code>TODO: вставить ссылку в третий раз</code>)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod +x build_all.sh
+</span></span></code></pre></div><p>Теперь скрипт можно запустить и собрать всё</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./build_all.sh
+</span></span></code></pre></div><h2 id="make-или-как-не-пересобирать-все-каждый-раз">
+  make или как не пересобирать все каждый раз
+  <a class="anchor" href="#make-%d0%b8%d0%bb%d0%b8-%d0%ba%d0%b0%d0%ba-%d0%bd%d0%b5-%d0%bf%d0%b5%d1%80%d0%b5%d1%81%d0%be%d0%b1%d0%b8%d1%80%d0%b0%d1%82%d1%8c-%d0%b2%d1%81%d0%b5-%d0%ba%d0%b0%d0%b6%d0%b4%d1%8b%d0%b9-%d1%80%d0%b0%d0%b7">#</a>
+</h2>
+<p>Чем ручной процесс был лучше скрипта <code>build_all.sh</code>?
+Тем, что мы могли не пересобирать файлы, которые не менялись.</p>
+<p>В Unix есть тулза для сборки, которая умеет следить за изменениями файлов
+и пересобирать только изменившиеся.
+Программа называется - <code>make</code>.</p>
+<p><code>make</code> обрабатывает блоки +-такого вида</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>small_math.o: small_math.h small_math.c
+</span></span><span style="display:flex;"><span>    gcc -c small_math.c
+</span></span></code></pre></div><p>(там не 4 пробела, там <strong>таб</strong> <code>\t</code> - это <a href="https://datatracker.ietf.org/doc/html/rfc2119"><strong>обязательно</strong></a>)</p>
+<ul>
+<li><code>small_math.o</code> - это <strong>цель</strong></li>
+<li><code>small_math.h</code> и <code>small_math.c</code> - это <strong>зависимости</strong></li>
+<li><code>gcc -c small_math.c</code> - это инструкция, как из <strong>зависимостей</strong> собрать <strong>цель</strong>
+<ul>
+<li>в роли инструкци может быть любая команда</li>
+</ul>
+</li>
+</ul>
+<p><strong>цель</strong> и <strong>зависимости</strong> - почти всегда являются файлами.
+Можно собрать отдельную цель выполнив <code>make small_math.o</code>.
+По умолчанию запуск <code>make</code> без аргументов равносилен <code>make all</code> (<code>all</code> - пример, когда цель не является файлом).</p>
+<p>Все блоки с инструкциями помещаются в файл с названием <code>Makefile</code>.
+<code>Makefile</code> для нашего проекта будет какой-то такой</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cat Makefile
+</span></span><span style="display:flex;"><span>all: small_math.o hashlib.o encription.o main.o
+</span></span><span style="display:flex;"><span>    gcc -o small_math.o hashlib.o encription.o main.o -o bitcoin_cracker
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>main.o: main.c hashlib.h encription.h
+</span></span><span style="display:flex;"><span>    gcc -c main.c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>hashlib.o: hashlib.c hashlib.h
+</span></span><span style="display:flex;"><span>    gcc -c hashlib.c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>encription.o: encription.c encription.h
+</span></span><span style="display:flex;"><span>    gcc -c encription.c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>small_math.o: small_math.c small_math.h
+</span></span><span style="display:flex;"><span>    gcc -c small_math.c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>clean:
+</span></span><span style="display:flex;"><span>    rm -rf *.o bitcoin_cracker
+</span></span></code></pre></div><p>Ещё принято добавлять цель <code>clean</code>, чтоб при запуске <code>make clean</code> очищались артефакты сборки.</p>
+<p>Проргама <code>make</code> сама отслеживает обновления файлов и при запуске сборки (просто <code>make</code>) будет
+пересобирать только те <strong>цели</strong>, <strong>зависимости</strong> которых изменились.</p>
+<p>В домашках для сборки и тестирования используется make</p>
+<h4 id="а-ещё-в-make-есть-переменные">
+  А ещё в make есть переменные
+  <a class="anchor" href="#%d0%b0-%d0%b5%d1%89%d1%91-%d0%b2-make-%d0%b5%d1%81%d1%82%d1%8c-%d0%bf%d0%b5%d1%80%d0%b5%d0%bc%d0%b5%d0%bd%d0%bd%d1%8b%d0%b5">#</a>
+</h4>
+<p>Если вы собираете разными компиляторами или хотите однотипно настроить что-нибудь,
+то это будет проще сделать с помощью переменных</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cat Makefile
+</span></span><span style="display:flex;"><span>COMPILER<span style="color:#f92672">=</span>gcc
+</span></span><span style="display:flex;"><span>FLAGS<span style="color:#f92672">=</span>-ggdb
+</span></span><span style="display:flex;"><span>OUTPUT<span style="color:#f92672">=</span>bitcoin_cracker
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>all: small_math.o hashlib.o encription.o main.o
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">${</span>COMPILER<span style="color:#e6db74">}</span> <span style="color:#e6db74">${</span>FLAGS<span style="color:#e6db74">}</span> -o small_math.o hashlib.o encription.o main.o -o <span style="color:#e6db74">${</span>OUTPUT<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>main.o: main.c hashlib.h encription.h
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">${</span>COMPILER<span style="color:#e6db74">}</span> <span style="color:#e6db74">${</span>FLAGS<span style="color:#e6db74">}</span> -c main.c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>hashlib.o: hashlib.c hashlib.h
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">${</span>COMPILER<span style="color:#e6db74">}</span> <span style="color:#e6db74">${</span>FLAGS<span style="color:#e6db74">}</span> -c hashlib.c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>encription.o: encription.c encription.h
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">${</span>COMPILER<span style="color:#e6db74">}</span> <span style="color:#e6db74">${</span>FLAGS<span style="color:#e6db74">}</span> -c encription.c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>small_math.o: small_math.c small_math.h
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">${</span>COMPILER<span style="color:#e6db74">}</span> <span style="color:#e6db74">${</span>FLAGS<span style="color:#e6db74">}</span> -c small_math.c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>clean:
+</span></span><span style="display:flex;"><span>    rm -rf *.o bitcoin_cracker
+</span></span></code></pre></div><p>Можно делать более крутые и полезные вещи, примеры есть <a href="https://ftp.gnu.org/old-gnu/Manuals/make-3.79.1/html_chapter/make_6.html">вот тут</a>.</p>
+<h2 id="cmake-или-как-генерировать-makefile">
+  cmake или как генерировать Makefile
+  <a class="anchor" href="#cmake-%d0%b8%d0%bb%d0%b8-%d0%ba%d0%b0%d0%ba-%d0%b3%d0%b5%d0%bd%d0%b5%d1%80%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d1%82%d1%8c-makefile">#</a>
+</h2>
+<p>Можно бесконечно делать 3 вещи</p>
+<ul>
+<li>смотреть, как горит огонь</li>
+<li>наблюдать, как течет вода</li>
+<li>и слушать, как разработчик жалуется на документацию cmake
+<ul>
+<li>не то чтоб она прям очень плохая, страшная и неудобная&hellip;</li>
+<li>просто она имеет бесконечный потенциал для оптимизации</li>
+</ul>
+</li>
+</ul>
+<p>Но cmake решает сразу много важных проблем</p>
+<ul>
+<li>он позволяет собирать код разными компиляторами и на разных системах</li>
+<li>он позволяет использовать кросплатформенные библиотеки (OpenGL for example)</li>
+<li>он позволяет автоматически генерировать Makefile, а не прописывать всё ручками
+<ul>
+<li>для больших проектов это прям спасение</li>
+</ul>
+</li>
+<li>а ещё помимо Makefile, он умеет
+<ul>
+<li>создавать проекты под разные IDE: <code>Visual Studio</code> / <code>Xcode</code> / <code>CodeBlocks</code> / &hellip;</li>
+<li>использовать другие системы сборки: <code>Ninja</code> / &hellip;</li>
+<li>запускать разные скрипты (вообще любые)
+<ul>
+<li>и да, я тоже считаю, что это зло</li>
+</ul>
+</li>
+<li>запускать тесты!)</li>
+</ul>
+</li>
+</ul>
+<p><code>TODO: сделать пример для нашего проекта</code> (можете пока почитать <a href="https://habr.com/ru/articles/461817/">эту статью на хабре</a>)</p>
+<p>Теперь его можно собрать</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># сейчас мы в директории, где лежит CmakeLists.txt</span>
+</span></span><span style="display:flex;"><span>$ mkdir build
+</span></span><span style="display:flex;"><span>$ cd build
+</span></span><span style="display:flex;"><span>$ cmake ..
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># тут куча текста</span>
+</span></span><span style="display:flex;"><span>$ make
+</span></span><span style="display:flex;"><span>gcc -c small_math.c
+</span></span><span style="display:flex;"><span>gcc -c hashlib.c
+</span></span><span style="display:flex;"><span>gcc -c encription.c
+</span></span><span style="display:flex;"><span>gcc -c main.c
+</span></span><span style="display:flex;"><span>gcc small_math.o hashlib.o encription.o main.o -o bitcoin_cracker
+</span></span></code></pre></div><h2 id="слава-opensource">
+  Слава OpenSource!
+  <a class="anchor" href="#%d1%81%d0%bb%d0%b0%d0%b2%d0%b0-opensource">#</a>
+</h2>
+<p><img src="https://www.aseprite.org/assets/images/header-logo.png" alt="aseprite" /></p>
+<p>Слышали ли вы когда-нибудь про <a href="https://www.aseprite.org/">aseprite</a>?</p>
+<p>Это тулза для создания pixel-art рисунков и анимаций.
+Так получилось, что она распространяется под достаточно свободной лицензией
+(вероятнее всего из-за того, что одна из её библиотек распространяется под GPL-like лицензией)
+Поэтому её исходники лежат на гитхабе))</p>
+<p>Это не проблема, т.к. художники не умеют собирать код из исходников, а программисты не умеют рисовать&hellip;</p>
+<p>Листаем в самый низ сайта и в колонке <strong>Development</strong> находим ссылку на <a href="https://github.com/aseprite/aseprite">GitHub</a>.
+В корне видем уже знакомый нам <code>CMakeLists.txt</code>.
+Скачиваем проект себе локально и колдуем заклинание сборки</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mkdir build
+</span></span><span style="display:flex;"><span>$ cd build
+</span></span><span style="display:flex;"><span>$ cmake ..
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ....</span>
+</span></span><span style="display:flex;"><span>$ make
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ...</span>
+</span></span></code></pre></div><p>Сборка займет порядочно времени, но как итог - вы бесплатно (и <strong>легально!</strong>) получили рисовалку,
+которая продается почти за <code>20$</code>)</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#как-собирать-проекты">Как собирать проекты</a>
+      <ul>
+        <li><a href="#зависимости">Зависимости</a></li>
+        <li><a href="#собираем-все-ручками">Собираем все ручками</a></li>
+      </ul>
+    </li>
+    <li><a href="#sh-или-как-не-писать-ручками">.sh или как не писать ручками</a></li>
+    <li><a href="#make-или-как-не-пересобирать-все-каждый-раз">make или как не пересобирать все каждый раз</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#cmake-или-как-генерировать-makefile">cmake или как генерировать Makefile</a></li>
+    <li><a href="#слава-opensource">Слава OpenSource!</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
