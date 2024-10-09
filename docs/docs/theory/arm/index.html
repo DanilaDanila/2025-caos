@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ru-ru" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  ARM assembler
+  #
+
+В основном тут будут отличия x86_64 от ARM.
+И во многом будет дублировать лекцию.
+
+  CISC vs RISC
+  #
+
+
+
+
+  RISC
+  #
+
+
+
+Restricted Instruction Set Computer
+
+
+Small number of fixed length instructions
+
+
+Simple, standart instructions
+
+
+Read-Modify-Wright way
+
+
+Heavy use of RAM
+
+
+
+
+
+  CISC
+  #
+
+
+
+Complex Instruction Set Computer
+
+
+Large number of instructions
+
+
+Complex, variable-length instructions
+
+
+More efficient use of RAM">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://daniladanila.github.io/2024-caos-examples/docs/theory/arm/">
+  <meta property="og:site_name" content="caos theory">
+  <meta property="og:title" content="ARM assembler">
+  <meta property="og:description" content=" ARM assembler # В основном тут будут отличия x86_64 от ARM.
+И во многом будет дублировать лекцию.
+CISC vs RISC # RISC # Restricted Instruction Set Computer
+Small number of fixed length instructions
+Simple, standart instructions
+Read-Modify-Wright way
+Heavy use of RAM
+CISC # Complex Instruction Set Computer
+Large number of instructions
+Complex, variable-length instructions
+More efficient use of RAM">
+  <meta property="og:locale" content="ru_ru">
+  <meta property="og:type" content="website">
+<title>ARM assembler | caos theory</title>
+<link rel="icon" href="/2024-caos-examples/favicon.png" >
+<link rel="manifest" href="/2024-caos-examples/manifest.json">
+<link rel="canonical" href="https://daniladanila.github.io/2024-caos-examples/docs/theory/arm/">
+<link rel="stylesheet" href="/2024-caos-examples/book.min.3b63b9ecb24b01f1be0df5c6f361b3a2004ab96665227385e0196f67e7607b29.css" integrity="sha256-O2O57LJLAfG&#43;DfXG82GzogBKuWZlInOF4BlvZ&#43;dgeyk=" crossorigin="anonymous">
+  <script defer src="/2024-caos-examples/fuse.min.js"></script>
+  <script defer src="/2024-caos-examples/en.search.min.76946a08e2ff5ba1ae563c0a283125850bc3c67dc1b255948ac990283f16f842.js" integrity="sha256-dpRqCOL/W6GuVjwKKDElhQvDxn3BslWUismQKD8W&#43;EI=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="https://daniladanila.github.io/2024-caos-examples/docs/theory/arm/index.xml" title="caos theory" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/2024-caos-examples/"><span>caos theory</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/2024-caos-examples/docs/theory/" class="">Как закрыть курс</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/2024-caos-examples/docs/theory/whoami/" class="">whoami</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/2024-caos-examples/docs/theory/necronomicon/" class="">Некрономикон</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-96321df072730b9a64870c0191c9133b" class="toggle"  />
+    <label for="section-96321df072730b9a64870c0191c9133b" class="flex justify-between">
+      <a href="/2024-caos-examples/docs/theory/devools/" class="">Инструменты разработки</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/2024-caos-examples/docs/theory/devools/bash/" class="">bash</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/2024-caos-examples/docs/theory/devools/build/" class="">этапы сборки</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/2024-caos-examples/docs/theory/devools/debugger/" class="">как ловить ошибки</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/2024-caos-examples/docs/theory/devools/make/" class="">автоматизация сборки</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-123d53d4dd188d20ee5174bebd51adc4" class="toggle"  />
+    <label for="section-123d53d4dd188d20ee5174bebd51adc4" class="flex justify-between">
+      <a href="/2024-caos-examples/docs/theory/x86_64/" class="">x86_64 assembler</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/2024-caos-examples/docs/theory/x86_64/floats/" class="">floats</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2ac106c088cac53c4787d657cccdb647" class="toggle" checked />
+    <label for="section-2ac106c088cac53c4787d657cccdb647" class="flex justify-between">
+      <a href="/2024-caos-examples/docs/theory/arm/" class="active">ARM assembler</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/2024-caos-examples/docs/theory/arm/linaro/" class="">Linaro (а как тестить)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/2024-caos-examples/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>ARM assembler</strong>
+
+  <label for="toc-control">
+    
+    <img src="/2024-caos-examples/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#cisc-vs-risc">CISC vs RISC</a>
+      <ul>
+        <li><a href="#risc">RISC</a></li>
+        <li><a href="#cisc">CISC</a></li>
+      </ul>
+    </li>
+    <li><a href="#arm-регистры">ARM регистры</a></li>
+    <li><a href="#основные-команды">основные команды</a></li>
+    <li><a href="#arm-conditionals">ARM conditionals</a></li>
+    <li><a href="#отличия-в-самом-синтаксисе">Отличия в самом синтаксисе</a></li>
+    <li><a href="#rmw-flow">RMW flow</a></li>
+    <li><a href="#ветвление">Ветвление</a></li>
+    <li><a href="#вызов-функций">Вызов функций</a></li>
+    <li><a href="#calling-convention">Calling convention</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="arm-assembler">
+  ARM assembler
+  <a class="anchor" href="#arm-assembler">#</a>
+</h1>
+<p>В основном тут будут отличия x86_64 от ARM.</p>
+<p>И во многом будет дублировать лекцию.</p>
+<h2 id="cisc-vs-risc">
+  CISC vs RISC
+  <a class="anchor" href="#cisc-vs-risc">#</a>
+</h2>
+<div class="book-columns flex flex-wrap">
+<div class="flex-even markdown-inner" style="flex-grow: 1;">
+<h3 id="risc">
+  RISC
+  <a class="anchor" href="#risc">#</a>
+</h3>
+<ul>
+<li>
+<p>Restricted Instruction Set Computer</p>
+</li>
+<li>
+<p>Small number of fixed length instructions</p>
+</li>
+<li>
+<p>Simple, standart instructions</p>
+</li>
+<li>
+<p>Read-Modify-Wright way</p>
+</li>
+<li>
+<p>Heavy use of RAM</p>
+</div>
+</li>
+</ul>
+<div class="flex-even markdown-inner" style="flex-grow: 1;">
+<h3 id="cisc">
+  CISC
+  <a class="anchor" href="#cisc">#</a>
+</h3>
+<ul>
+<li>
+<p>Complex Instruction Set Computer</p>
+</li>
+<li>
+<p>Large number of instructions</p>
+</li>
+<li>
+<p>Complex, variable-length instructions</p>
+</li>
+<li>
+<p>More efficient use of RAM</p>
+</div>
+</li>
+</ul>
+</div>
+<p>В целом (за парой оговорками), можно считать, что <code>x86_64</code> это <code>CISC</code>, а <code>ARM</code> это <code>RISC</code>.</p>
+<p><img src="/sems/arm/elbrus.jpg" alt="elbrus" /></p>
+<p>Если кто-то вдруг вспомнил про Эльбрус, то там <code>VLIW</code> (<code>Very Large Instruction Word</code>).
+Одной инструкцией даётся команда на все ядра (вроде). Там свои плюсы / минусы и вообще своя атмосфера.
+Про него в курсе не будет, хотя чисто архитектурно штука интересная.</p>
+<h2 id="arm-регистры">
+  ARM регистры
+  <a class="anchor" href="#arm-%d1%80%d0%b5%d0%b3%d0%b8%d1%81%d1%82%d1%80%d1%8b">#</a>
+</h2>
+<ul>
+<li><code>x0</code>, <code>x1</code>, <code>x2</code>, &hellip; <code>x30</code> - 64bit</li>
+<li><code>w0</code>, <code>w1</code>, <code>w2</code>, &hellip; <code>w30</code> - 32bit (вложены в <code>xN</code>)</li>
+<li>есть регистр в котором всегда <code>0</code> - <code>xzr</code> (<code>wzr</code>)</li>
+</ul>
+<p>дальше чуть привычнее</p>
+<ul>
+<li><code>sp</code> - aka Stack Pointer</li>
+<li><code>pc</code> - aka Instruction Pointer (мастер аббревиатур)</li>
+</ul>
+<h2 id="основные-команды">
+  основные команды
+  <a class="anchor" href="#%d0%be%d1%81%d0%bd%d0%be%d0%b2%d0%bd%d1%8b%d0%b5-%d0%ba%d0%be%d0%bc%d0%b0%d0%bd%d0%b4%d1%8b">#</a>
+</h2>
+<ul>
+<li><code>mov</code>
+<ul>
+<li>уже должны помнить)</li>
+<li><code>mov reg1 reg2</code></li>
+<li><code>mov reg1 =123</code></li>
+</ul>
+</li>
+<li><code>str{type} Xn [Xs]</code>
+<ul>
+<li>сохраняет данные из регистра <code>Xn</code> по адресу <code>Xs</code></li>
+<li><code>{type}</code> указывает на размер
+<ul>
+<li>является необязательным
+<ul>
+<li>без <code>{type}</code> сохранит регистр целиком</li>
+</ul>
+</li>
+<li><code>b</code> - unsigned byte</li>
+<li><code>sb</code> - signed byte</li>
+<li><code>h</code> - half (16 bits) - т.к. машинное слово - 32bits</li>
+<li><code>sh</code> - signed half</li>
+<li>регистров меньше 32bit нету - отсюда нужны именно такие суффиксы</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>ldr{type} Xn =label</code>
+<ul>
+<li>загружает данные в регистр <code>Xn</code> из памяти по метке <code>label</code></li>
+<li><code>{type}</code> - необязателен; использование аналогично <code>str</code></li>
+</ul>
+</li>
+<li><code>ldr{type} Xn [Xs]</code>
+<ul>
+<li>загружает данные в регистр <code>Xn</code> из памяти по адресу <code>Xs</code></li>
+<li><code>{type}</code> - необязателен; использование аналогично <code>str</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="arm-conditionals">
+  ARM conditionals
+  <a class="anchor" href="#arm-conditionals">#</a>
+</h2>
+<p>В <code>x86_64</code> единственным способом добавить нелинейности в программу были <code>jmp</code>
+(ну и всякие <code>jne</code>, <code>jle</code>, &hellip;)</p>
+<p>В ARM суффиксы можно добавить к большинству инструкций.
+В регистре флагов <code>pstate</code> есть флаги <code>n</code> - negative, <code>z</code> - zero, <code>c</code> - carry, <code>v</code> - overflow (г - лоГгика).</p>
+<p>Суффиксы в <code>x86_64</code> и <code>ARM</code> <strong>отличаются</strong> (не силно но отличаются)</p>
+<pre tabindex="0"><code>EQ	Equal
+NE	Not equal
+CS	Carry set (identical to HS)
+HS	Unsigned higher or same (identical to CS)
+CC	Carry clear (identical to LO)
+LO	Unsigned lower (identical to CC)
+MI	Minus or negative result
+PL	Positive or zero result
+VS	Overflow
+VC	No overflow
+HI	Unsigned higher
+LS	Unsigned lower or same
+GE	Signed greater than or equal
+LT	Signed less than
+GT	Signed greater than
+LE	Signed less than or equal
+AL	Always (this is the default)
+</code></pre><p>Если такая команда выполняется всегда</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">x0</span>, <span style="color:#66d9ef">x1</span>
+</span></span></code></pre></div><p>То вот такая уже в зависимости от <code>pstate</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">movne</span> <span style="color:#66d9ef">x0</span>, <span style="color:#66d9ef">x1</span>
+</span></span></code></pre></div><h2 id="отличия-в-самом-синтаксисе">
+  Отличия в самом синтаксисе
+  <a class="anchor" href="#%d0%be%d1%82%d0%bb%d0%b8%d1%87%d0%b8%d1%8f-%d0%b2-%d1%81%d0%b0%d0%bc%d0%be%d0%bc-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81%d0%b5">#</a>
+</h2>
+<p>Вообще говоря в <code>ARM</code> у арифметических команд целых 3 параметра</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">add</span> <span style="color:#66d9ef">Xd</span>, <span style="color:#66d9ef">Xn</span>, <span style="color:#66d9ef">Xm</span>
+</span></span></code></pre></div><p>Это простое и лаконичное <code>Xd = Xn + Xm</code></p>
+<p>При этом центральный аргумент может дублировать левый</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">add</span> <span style="color:#66d9ef">Xd</span>, <span style="color:#66d9ef">Xd</span>, <span style="color:#66d9ef">Xm</span>
+</span></span></code></pre></div><p>Всё правильно - <code>Xd = Xd + Xm</code></p>
+<p>При этом в <code>GAS</code> есть синтаксический сахар - если первый и второй аргументы
+совпадают, то второй аргумент можно опустить</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">add</span> <span style="color:#66d9ef">Xd</span>, <span style="color:#66d9ef">Xm</span>
+</span></span></code></pre></div><h2 id="rmw-flow">
+  RMW flow
+  <a class="anchor" href="#rmw-flow">#</a>
+</h2>
+<p>Read-Modify-Write очень прост - читаем, что-то делаем, сохраняем (thx cap)</p>
+<p>Вот так можно загружать из памяти</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">ldr</span> <span style="color:#66d9ef">Xt</span>, [<span style="color:#66d9ef">Xn</span>, <span style="color:#66d9ef">offset</span>]     <span style="color:#75715e">; Xt = *(Xn + offset), offset \in [-256, 16384)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">ldr</span> <span style="color:#66d9ef">Xt</span>, [<span style="color:#66d9ef">Xn</span>]             <span style="color:#75715e">; Xt = *Xn
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">ldr</span> <span style="color:#66d9ef">Xt</span>, <span style="color:#960050;background-color:#1e0010">=</span><span style="color:#66d9ef">label</span>           <span style="color:#75715e">; Xt = *label
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">ldr</span> <span style="color:#66d9ef">Xt</span>, [<span style="color:#66d9ef">Xn</span>, <span style="color:#66d9ef">Xm</span>]         <span style="color:#75715e">; Xt = *(Xn + Xm)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">ldr</span> <span style="color:#66d9ef">Xt</span>, [<span style="color:#66d9ef">Xn</span>, <span style="color:#66d9ef">Xm</span>, <span style="color:#66d9ef">LSL</span> <span style="color:#66d9ef">n</span>]  <span style="color:#75715e">; Xt = *(Xn + (Xm &lt;&lt; n)) = *(Xn + Xm * (2 ** n)), n = 1/2/3/4/8
+</span></span></span></code></pre></div><h2 id="ветвление">
+  Ветвление
+  <a class="anchor" href="#%d0%b2%d0%b5%d1%82%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d0%b5">#</a>
+</h2>
+<p>Вместо <code>jmp</code> тут <code>b</code> (aka <code>branch</code>)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span><span style="color:#a6e22e">beq</span> <span style="color:#66d9ef">label</span> <span style="color:#75715e">; Branch to label if equal (z = 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">bne</span> <span style="color:#66d9ef">label</span> <span style="color:#75715e">; Branch to label if not equal (z = 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">blt</span> <span style="color:#66d9ef">label</span> <span style="color:#75715e">; Branch to label if less than (n != v)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">ble</span> <span style="color:#66d9ef">label</span> <span style="color:#75715e">; Branch to label if less or equal (z = 1 or n != v)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">bgt</span> <span style="color:#66d9ef">label</span> <span style="color:#75715e">; Branch to label if greater than (z = 0 and n == v)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">bge</span> <span style="color:#66d9ef">label</span> <span style="color:#75715e">; Branch to label if greater or equal (n == v)
+</span></span></span></code></pre></div><h2 id="вызов-функций">
+  Вызов функций
+  <a class="anchor" href="#%d0%b2%d1%8b%d0%b7%d0%be%d0%b2-%d1%84%d1%83%d0%bd%d0%ba%d1%86%d0%b8%d0%b9">#</a>
+</h2>
+<p><code>ret</code> существует</p>
+<p><code>call</code> не существует - вместо него <code>bl</code> (aka Branch with Link).
+<code>bl</code> кладет адрес возврата <strong>не</strong> на стек, а в <code>x30</code>.</p>
+<p>Если хотите вызвать что-то ещё - кладите <code>x30</code> на стек ручками (<code>push</code> + <code>pop</code>).</p>
+<p>За счет этого получаем почти бесплатные (по сравнению с <code>x86_64</code>) вызовы малых функций.</p>
+<h2 id="calling-convention">
+  Calling convention
+  <a class="anchor" href="#calling-convention">#</a>
+</h2>
+<ul>
+<li><code>x0</code>..<code>x7</code> - аргументы (и в <code>x0</code> - возвращаемое значение)</li>
+<li><code>x19</code>..<code>x28</code> - callee-saved registers (вы их должны сохранить)</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#cisc-vs-risc">CISC vs RISC</a>
+      <ul>
+        <li><a href="#risc">RISC</a></li>
+        <li><a href="#cisc">CISC</a></li>
+      </ul>
+    </li>
+    <li><a href="#arm-регистры">ARM регистры</a></li>
+    <li><a href="#основные-команды">основные команды</a></li>
+    <li><a href="#arm-conditionals">ARM conditionals</a></li>
+    <li><a href="#отличия-в-самом-синтаксисе">Отличия в самом синтаксисе</a></li>
+    <li><a href="#rmw-flow">RMW flow</a></li>
+    <li><a href="#ветвление">Ветвление</a></li>
+    <li><a href="#вызов-функций">Вызов функций</a></li>
+    <li><a href="#calling-convention">Calling convention</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
