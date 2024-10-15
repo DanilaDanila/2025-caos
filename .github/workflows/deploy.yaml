@@ -63,7 +63,7 @@ jobs:
       - name: Create symlinks to smth.slides.html
         run: |
           mkdir -p ./notes/static/slides && \
-          find . -regex '.*\.slides\.html' | xargs -I SLIDES bash -c 'ln -s SLIDES ./notes/static/slides/$(basename SLIDES)'
+          find . -regex '.*\.slides\.html' | xargs -I SLIDES bash -c 'cp SLIDES ./notes/static/slides/$(basename SLIDES)'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
