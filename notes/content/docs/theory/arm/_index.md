@@ -33,7 +33,7 @@ bookCollapseSection: true
 
 В целом (за парой оговорками), можно считать, что `x86_64` это `CISC`, а `ARM` это `RISC`.
 
-![elbrus](sems/arm/elbrus.jpg)
+![elbrus](../../../../sems/arm/elbrus.jpg)
 
 Если кто-то вдруг вспомнил про Эльбрус, то там `VLIW` (`Very Large Instruction Word`).
 Одной инструкцией даётся команда на все ядра (вроде). Там свои плюсы / минусы и вообще своя атмосфера.
