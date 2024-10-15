@@ -2,7 +2,7 @@ baseURL = 'https://daniladanila.github.io/2024-caos-examples/'
 languageCode = 'ru-ru'
 title = 'caos theory'
 theme = 'hugo-book'
-# publishDir = '../docs/'
+publishDir = '../docs/'
 
 [markup.goldmark.renderer]
   unsafe = true
