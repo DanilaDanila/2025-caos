@@ -15,14 +15,15 @@ type: docs
 - ну и слева есть теория по всем темам
 
 
-## Manytask с задачками
+## Общие ссылки курса
 
-`TODO: вставить ссылку, когда появится`
+- [Manytask с задачками](https://manytask.carzil.ru/)
+- [Табличка с успаваемостью](https://docs.google.com/spreadsheets/d/1ynF6GIW1I2x8heONNzOI8XZHmFDhjqBEQcKUZp16U4c/edit?gid=0#gid=0)
 
 
-## Табличка с баллами
+## Табличка с защитами и code review
 
-`TODO: ну видимо завести табличку`
+- `TODO: вставить ссылку на табличку защита+code_review`
 
 
 ## Просто ссылка на github
