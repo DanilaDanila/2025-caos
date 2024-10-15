@@ -1,0 +1,15 @@
+
+0xfffff
+       -- ...
+       -- ret addr  // call main
+       -- 8byte PASSWORD
+       -- 8byte user_input
+       -- ret addr for scanf
+       ....
+
+
+0x00000
+
+
+
+

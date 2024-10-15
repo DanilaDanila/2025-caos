@@ -4,3 +4,5 @@ recordings/*
 *.out
 *.o
 
+.ipynb_checkpoints
+
