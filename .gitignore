@@ -6,3 +6,5 @@ recordings/*
 
 .ipynb_checkpoints
 docs/
+
+notes/static/slides/
