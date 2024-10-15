@@ -33,9 +33,10 @@ type: docs
 ## Ссылочки на презенташки
 
 - [1_devtools](slides/devtools.slides.html#/)
-- [2_numbers](https://daniladanila.github.io/2024-caos-examples/2_numbers/datatypes.slides.html#/)
-- [3_files](https://daniladanila.github.io/2024-caos-examples/3_files/files.slides.html#/)
-- [4_x86](https://daniladanila.github.io/2024-caos-examples/4_x86/x86.slides.html#/)
+- [2_numbers](slides/datatypes.slides.html#/)
+- [3_files](slides/iles.slides.html#/)
+- [4_x86](slides/x86.slides.html#/)
+- [5_arm](slides/arm.slides.html#/)
 
 
 ## Ссылочки на записи
