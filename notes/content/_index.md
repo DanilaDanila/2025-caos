@@ -34,7 +34,7 @@ type: docs
 
 - [1_devtools](slides/devtools.slides.html#/)
 - [2_numbers](slides/datatypes.slides.html#/)
-- [3_files](slides/iles.slides.html#/)
+- [3_files](slides/files.slides.html#/)
 - [4_x86](slides/x86.slides.html#/)
 - [5_arm](slides/arm.slides.html#/)
 
