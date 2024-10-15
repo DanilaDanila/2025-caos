@@ -53,7 +53,7 @@ jobs:
       - name: Create symlinks to smth.slides.html
         run: |
           mkdir -p ./notes/static/slides && \
-          find . -regex '.*\.slides\.html' | xargs -I SLIDES bash -c 'cp SLIDES ./notes/static/slides/$(basename SLIDES)'
+          find . -regex '.*\.slides\.html' | xargs -I SLIDES bash -c 'ln -s SLIDES ./notes/static/slides/$(basename SLIDES)'
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
