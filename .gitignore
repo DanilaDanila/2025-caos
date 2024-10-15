@@ -1,10 +1,13 @@
-recordings
-recordings/*
+# not 4 github
+/recordings
 
+# cache
+.ipynb_checkpoints
+
+# build artefacts
 *.out
 *.o
 
-.ipynb_checkpoints
-./docs/
-
-notes/static/slides/
+# local artefacts
+/docs/
+/notes/static/slides/
