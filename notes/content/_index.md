@@ -38,6 +38,7 @@ type: docs
 - [3_files](slides/files.slides.html#/)
 - [4_x86](slides/x86.slides.html#/)
 - [5_arm](slides/arm.slides.html#/)
+- [6_mmap](slides/mmap.slides.html#/)
 
 
 ## Ссылочки на записи
