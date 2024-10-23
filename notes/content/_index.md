@@ -39,6 +39,7 @@ type: docs
 - [4_x86](slides/x86.slides.html#/)
 - [5_arm](slides/arm.slides.html#/)
 - [6_mmap](slides/mmap.slides.html#/)
+- [7_form](slides/fork.slides.html#/)
 
 
 ## Ссылочки на записи
