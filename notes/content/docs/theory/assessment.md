@@ -1,11 +1,11 @@
 ---
 weight: 3
 bookFlatSection: true
-title: "Как закрыть курс"
+title: "Сдача задач"
 enableEmoji: true
 ---
 
-# Как закрыть курс
+# Сдача задач
 
 - solve
 - review
