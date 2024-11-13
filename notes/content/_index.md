@@ -41,6 +41,8 @@ type: docs
 - [6_mmap](slides/mmap.slides.html#/)
 - [7_fork](slides/fork.slides.html#/)
 - [8_mutex](slides/mutex.slides.html#/)
+- [9_pipe](slides/pipe.slides.html#/)
+- [10_web-server](slides/socket.slides.html#/)
 
 
 ## Ссылочки на записи
