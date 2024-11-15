@@ -1,3 +1,7 @@
+# Pages
+
+[https://daniladanila.github.io/2024-caos-examples/](https://daniladanila.github.io/2024-caos-examples/)
+
 # Хеллоу
 
 [Записи семинаров](https://disk.yandex.ru/d/_UP4I3wQyXR55g)
@@ -8,5 +12,5 @@
 - [3_files](https://daniladanila.github.io/2024-caos-examples/3_files/files.slides.html#/)
 - [4_x86](https://daniladanila.github.io/2024-caos-examples/4_x86/x86.slides.html#/)
 
-Для 2-ого и 3-его занятия позже напишу что-нибудь внятное
+(тут больше ничего интересного не будет)
  
