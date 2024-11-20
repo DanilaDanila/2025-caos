@@ -43,6 +43,7 @@ type: docs
 - [8_mutex](slides/mutex.slides.html#/)
 - [9_pipe](slides/pipe.slides.html#/)
 - [10_web-server](slides/socket.slides.html#/)
+- [11_epoll](slides/epoll.slides.html#/)
 
 
 ## Ссылочки на записи
