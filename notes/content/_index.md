@@ -44,6 +44,8 @@ type: docs
 - [9_pipe](slides/pipe.slides.html#/)
 - [10_web-server](slides/socket.slides.html#/)
 - [11_epoll](slides/epoll.slides.html#/)
+- [12_dynamic](slides/dynamic.slides.html#/)
+- [13_isolation](slides/isolation.slides.html#/)
 
 
 ## Ссылочки на записи
