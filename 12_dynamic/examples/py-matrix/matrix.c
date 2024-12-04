@@ -146,7 +146,8 @@ PyMODINIT_FUNC PyInit_matrix()
 
 			.ml_flags = METH_VARARGS,
 
-			.ml_doc = "Multiply matrix with C"
+			.ml_doc = "(int, matrix, matrix)"
+                      "Multiply matrix with C"
 		},
 
 		{NULL, NULL, 0, NULL},
