@@ -1,3 +1,6 @@
-all: main.c
-	gcc main.c  -lseccomp
+all: a.out
+	./a.out
+
+a.out:
+	gcc main.c -lseccomp
 

@@ -17,9 +17,18 @@ int main() {
     printf("current pid = %d\n", pid);
 
     seccomp_load(ctx);
+    char msg[] = "asdsadsdsad";
+    write(2, msg, sizeof(msg));
+    seccomp_reset(ctx, SCMP_ACT_ALLOW);
+    write(2, msg, sizeof(msg));
+    seccomp_load(ctx);
+    write(2, msg, sizeof(msg));
+
+    // printf("ahahah");
     pid = getpid();
     printf("!! YOU SHOULD NOT SEE THIS!! My PID is%d\n", pid);
 
+    seccomp_release(ctx);
     return 0;
 }
 
