@@ -46,6 +46,7 @@ type: docs
 - [11_epoll](slides/epoll.slides.html#/)
 - [12_dynamic](slides/dynamic.slides.html#/)
 - [13_isolation](slides/isolation.slides.html#/)
+- [14_devtools_2](slides/devtools_2.slides.html#/)
 
 
 ## Ссылочки на записи
