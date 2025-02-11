@@ -1,6 +1,6 @@
-#include "lib.h"
+#include "my_math.h"
 
-extern bar;
-
-void foo() {}
+void foo() {
+    float x01 = my_sin(0.1f);
+}
 

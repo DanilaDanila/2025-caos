@@ -1,21 +1,22 @@
 	.file	"main.c"
+	.intel_syntax noprefix
 	.text
 	.globl	foo
 	.type	foo, @function
 foo:
 .LFB0:
 	.cfi_startproc
-	pushq	%rbp
+	push	rbp
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
-	movq	%rsp, %rbp
+	mov	rbp, rsp
 	.cfi_def_cfa_register 6
-	subq	$16, %rsp
-	movl	.LC0(%rip), %eax
-	movd	%eax, %xmm0
+	sub	rsp, 16
+	mov	eax, DWORD PTR .LC0[rip]
+	movd	xmm0, eax
 	call	my_sin@PLT
-	movd	%xmm0, %eax
-	movl	%eax, -4(%rbp)
+	movd	eax, xmm0
+	mov	DWORD PTR -4[rbp], eax
 	nop
 	leave
 	.cfi_def_cfa 7, 8
@@ -28,17 +29,17 @@ foo:
 bar:
 .LFB1:
 	.cfi_startproc
-	pushq	%rbp
+	push	rbp
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
-	movq	%rsp, %rbp
+	mov	rbp, rsp
 	.cfi_def_cfa_register 6
-	subq	$16, %rsp
-	movl	.LC0(%rip), %eax
-	movd	%eax, %xmm0
+	sub	rsp, 16
+	mov	eax, DWORD PTR .LC0[rip]
+	movd	xmm0, eax
 	call	my_sin@PLT
-	movd	%xmm0, %eax
-	movl	%eax, -4(%rbp)
+	movd	eax, xmm0
+	mov	DWORD PTR -4[rbp], eax
 	nop
 	leave
 	.cfi_def_cfa 7, 8
@@ -51,13 +52,13 @@ bar:
 main:
 .LFB2:
 	.cfi_startproc
-	pushq	%rbp
+	push	rbp
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
-	movq	%rsp, %rbp
+	mov	rbp, rsp
 	.cfi_def_cfa_register 6
-	movl	$0, %eax
-	popq	%rbp
+	mov	eax, 0
+	pop	rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
