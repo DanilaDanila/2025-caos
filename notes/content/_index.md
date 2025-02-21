@@ -3,7 +3,7 @@ title: Introduction
 type: docs
 ---
 
-# АКОС 2024 (группы 325-326)
+# АКОС 2025 (blockchain)
 
 
 ## А где я?...
@@ -15,15 +15,11 @@ type: docs
 - ну и слева есть теория по всем темам
 
 
-## Общие ссылки курса
+## Полезные ссылки
 
-- [Manytask с задачками](https://manytask.carzil.ru/)
-- [Табличка с успаваемостью](https://docs.google.com/spreadsheets/d/1ynF6GIW1I2x8heONNzOI8XZHmFDhjqBEQcKUZp16U4c/edit?gid=0#gid=0)
-
-
-## Табличка с защитами и code review
-
-- `TODO: вставить ссылку на табличку защита+code_review`
+- `Manytask с задачками` (появится позже)
+- `Табличка с защитами` (появится позже)
+- `Табличка с успаваемостью` (появится позже)
 
 
 ## Просто ссылка на github
@@ -51,7 +47,7 @@ type: docs
 
 ## Ссылочки на записи
 
-- [папка на диске](https://disk.yandex.ru/d/_UP4I3wQyXR55g)
+- [записи осени 2024](https://disk.yandex.ru/d/_UP4I3wQyXR55g)
 
 
 ## А ты это типо сам сверстал?
@@ -65,5 +61,5 @@ type: docs
 
 Если чешутся руки - у вас целых два путя))
 
-{{<button href="https://github.com/DanilaDanila/2024-caos-examples/issues/new?assignees=&labels=&projects=&template=%D1%85%D0%BE%D1%87%D1%83--%D1%87%D1%82%D0%BE%D0%B1-%D0%B7%D0%B0-%D0%BC%D0%B5%D0%BD%D1%8F-%D0%BA%D1%82%D0%BE-%D0%BD%D0%B8%D0%B1%D1%83%D0%B4%D1%8C-%D0%BF%D0%BE%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB-%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D1%83.md&title=">}}я нашел ошибку{{</button>}}
+{{<button href="https://github.com/DanilaDanila/2025-caos-blockchain/issues/new?assignees=&labels=&projects=&template=%D1%85%D0%BE%D1%87%D1%83--%D1%87%D1%82%D0%BE%D0%B1-%D0%B7%D0%B0-%D0%BC%D0%B5%D0%BD%D1%8F-%D0%BA%D1%82%D0%BE-%D0%BD%D0%B8%D0%B1%D1%83%D0%B4%D1%8C-%D0%BF%D0%BE%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB-%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D1%83.md&title=">}}я нашел ошибку{{</button>}}
 {{<button href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request">}}я хочу что-то дополнить{{</button>}}
