@@ -1,4 +1,0 @@
-assert False
-
-assert(False)
-
