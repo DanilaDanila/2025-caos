@@ -24,7 +24,7 @@ type: docs
 
 ## Просто ссылка на github
 
-- [2024-caos-examples](https://github.com/DanilaDanila/2024-caos-examples/tree/master)
+- [2025-caos-blockchain](https://github.com/DanilaDanila/2025-caos-blockchain/tree/master)
 
 
 ## Ссылочки на презенташки
@@ -48,6 +48,7 @@ type: docs
 ## Ссылочки на записи
 
 - [записи осени 2024](https://disk.yandex.ru/d/_UP4I3wQyXR55g)
+- `записи весна 2025` (когда-нибудь появятся)
 
 
 ## А ты это типо сам сверстал?
