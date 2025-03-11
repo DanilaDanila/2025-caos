@@ -1,0 +1,120 @@
+
+
+ax := 0x1012
+ah = 0x10
+al = 0x12
+
+
+al := 0xff
+ax = 0x10ff
+
+
+rax := 0xfff..ff
+al = 0xff
+
+al := 0xee
+rax = 0xfff..ee
+
+
+int arr[10];
+
+arr[5] <--> *(arr + 5)
+5[arr] <--> *(5 + arr)
+
+
+
+struct S {
+    int length;
+    uint32_t arr[];
+};
+
+struct S my_s;
+...
+
+my_s.arr[10] <--> *((void*)my_s.arr + 10 * 4)
+<--> *(
+(void*)my_s + offset(S, "arr") + 10 * sizeof(uint32_t)
+)
+
+
+add
+sub
+div
+mod
+
+
+add rax, rbx
+rax += rbx
+
+div rax, rbx
+rax //= rbx
+
+
+
+stack: linked list
+
+stack: arr
+
+
+int arr[1024];
+int stack_top = 1023;
+
+arr[stack_top--] = ...
+
+stack_top -= 5;
+...
+stack_top += 5;
+
+
+
+rsp = arr + stack-top;
+
+*(rsp--) = ...
+
+
+
+
+
+int foo(...):
+    ret   <--> pop rbx
+               jmp rbx
+
+
+call foo <--> push rip + 4
+              jmp foo
+mov rax, rbp    <--- rip + 4
+
+
+
+int foo() {}
+
+
+foo() // 1
+...
+foo() // 2
+
+
+
+asdad1233:
+    mov rax, 10
+    sub rax, 11
+
+
+
+
+sub rax, rbx
+jz foo_bar
+
+ZF = (rax == 0) ? 1 : 0;
+
+cmp ah, al
+ah = 0
+al = 200 ~ -54
+
+
+
+
+
+
+
+
