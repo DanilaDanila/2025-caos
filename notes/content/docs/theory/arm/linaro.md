@@ -8,17 +8,18 @@ enableEmoji: true
 
 Если у вас есть MacBook на `ARM` или Raspberry Pi / другой китайский одноплатник, то можете писать на нём.
 
-Эта страничка необходима только людям с компами на intel.
+Эта страничка необходима только людям с компами на x86\_64.
 
 
 ## Cross compilation
 
-У нас компы на intel (`x86_64`), а код написан под `ARM`.
+У нас компы на intel (x86\_64), а код написан под `ARM`.
 Чтоб собирать под _другую_ (относительно нашей системы) архитектуру, нужен другой компилятор.
 
-### стандартные пакеты
+### Простой путь
 
-_I use Arch btw_ так что за Ubuntu не очень шарю, но кажется можно просто поставить
+Можно установить нужный компилятор с помощью менеджера пакетов.
+I use Arch btw и за Ubuntu не очень шарю, но вот так работало:
 
 ```bash
 sudo apt-get update
@@ -26,17 +27,19 @@ sudo apt-get install gcc-13-aarch64-linux-gnu
 ```
 
 После этого должен появиться компилятор `aarch64-linux-gnu-gcc`.
-Если да, то **gcc-linaro** можете пропустить
+Если да, то установку на этом можно закончить.
 
-### gcc-linaro
+### gcc-linaro - если простой путь не сработал
 
 Есть проект [Linaro](https://www.linaro.org/), можно позаимствовать компилятор у них.
-У них есть [toolchain](https://releases.linaro.org/components/toolchain/binaries/), можно взять последний [gcc-7](https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/aarch64-linux-gnu/).
+У них есть набор инструментов - [toolchain](https://releases.linaro.org/components/toolchain/binaries/), можно взять последний [gcc-7](https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/aarch64-linux-gnu/).
+Когда вы это читаете, 'последним' может быть уже другой)
 
-Качаем компилятор (`gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu.tar.xz`) и sysroot (`sysroot-glibc-linaro-2.25-2019.12-aarch64-linux-gnu.tar.xz`). Про sysroot чуть позже
+Качаем компилятор - `gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu.tar.xz` и sysroot - `sysroot-glibc-linaro-2.25-2019.12-aarch64-linux-gnu.tar.xz`.
+Зачем нужен sysroot будет ниже.
 
-После скачивания разархивируем оба архива (`tar xvf`; а вообще `tldr tar` вам подскажет).
-Самое полезное сейчас лежит вот тут
+После скачивания разархивируем оба архива - `tar xvf` (а вообще привыкайте к `man` / `info` / `tldr`).
+Самое полезное сейчас лежит в папке `/bin`
 ```bash
 $ ls gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin
 aarch64-linux-gnu-addr2line   aarch64-linux-gnu-gcov-tool
@@ -57,13 +60,14 @@ aarch64-linux-gnu-gcov	      aarch64-linux-gnu-strings
 aarch64-linux-gnu-gcov-dump   aarch64-linux-gnu-strip
 ```
 
-Чтоб при запуске не прописывать пути целиком можно прописать
+Чтоб при запуске не писать абсолютные пути можно дописать в переменную окружения `PATH`
+путь до папки `bin`.
 ```bash
 export PATH=$PATH:/home/danila/linaro/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin
 ```
-(очевидно нужно прописать правильный путь до папки)
 
-После этого (в том же терминале) должна отрабатывать команда
+После этого (в том же терминале) должна отрабатывать команда `aarch64-linux-gnu-gcc -v`.
+Без `./` и прочих путей)
 ```bash
 $ aarch64-linux-gnu-gcc -v
 Using built-in specs.
@@ -75,7 +79,9 @@ Thread model: posix
 gcc version 7.5.0 (Linaro GCC 7.5-2019.12)
 ```
 
-Теперь нужно проверить, что всё работает
+Если не хотите такое поведение по-умолчанию, то можете дописать `export PATH=$PATH:/home/...` в ваш `~/.bashrc` файл.
+
+Вот простой hello-world
 {{% details title="hello-world" open=false %}}
 ```c
 #include <stdio.h>
@@ -87,23 +93,33 @@ int main() {
 ```
 {{% /details %}}
 
-Собираем
+Попробуем его собрать
 ```bash
 aarch64-linux-gnu-gcc main.c
 ```
 
-И потом пробуем дизассемблировать. Наш `objdump` знать ничего не знает про `ARM`.
-Поэтому запускаем бинарник от linaro.
+И потом пробуем дизассемблировать.
+Наш `objdump` знать ничего не знает про `ARM`, поэтому запускаем бинарник от linaro.
 ```bash
 aarch64-linux-gnu-objdump -d a.out
 ```
 
 {{% details title="многа букав"%}}
 ```asm
+; это кусочек из main.o
+0000000000000000 <main>:
+   0:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+   4:	910003fd 	mov	x29, sp
+   8:	90000000 	adrp	x0, 0 <main>
+   c:	91000000 	add	x0, x0, #0x0
+  10:	94000000 	bl	0 <puts>
+  14:	52800000 	mov	w0, #0x0                   	// #0
+  18:	a8c17bfd 	ldp	x29, x30, [sp], #16
+  1c:	d65f03c0 	ret
 ```
 {{% /details %}}
 
-Стоит обратить внимание на стройные ряды op-кодов (либо 2 байта, либо 4 байта).
+Стоит обратить внимание на стройные ряды op-кодов)).
 
 
 ## QEMU
@@ -116,11 +132,14 @@ sudo apt-get install qemu-system-arm
 ```
 
 Но просто так запустить не получится - требуются динамические библиотеки.
-Они идут просто набором файликов. Папку с ними буду называть sysroot.
+Динамические библиотеки - просто файлики - нужно их скачать и задать путь.
+Скачаный ранее sysroot содержит (в основном) динамические библиотеки)
 Тут буду показывать вариант с linaro (архив `sysroot-glibc-linaro-2.25-2019.12-aarch64-linux-gnu.tar.xz`).
 
-{{% details title="а почему sysroot?" open=false %}}
-Потому что там дерево файликов linux-а))) Но только с arm-библиотеками.
+{{% details title="а почему называется sysroot?" open=false %}}
+Потому что там дерево файликов linux-а)))
+У вас в корневой директории +- то же самое.
+Но только с arm-библиотеками.
 
 ```bash
 $ ls sysroot-glibc-linaro-2.25-2019.12-aarch64-linux-gnu.tar.xz/
@@ -156,8 +175,9 @@ test_simple: input_simple/input_simple.txt simple
 ```
 
 Нужно
-- заменить `aarch64-linux-gnu-gcc` на нужное название компилятора
+- заменить `aarch64-linux-gnu-gcc` на правильное название компилятора
     - или на путь до компилятора
-    - если длинно/страшно/уродливо - вынесите в переменную
+    - если длинно/страшно/уродливо - вынесите компилятор переменную
 - заменить `-L /usr/aarch64-linux-gnu` на путь до `sysroot-glibc-linaro-2.25-2019.12-aarch64-linux-gnu`
-    - если длинно/страшно/уродливо - вынесите в переменную
+    - если длинно/страшно/уродливо - вынесите в переменную :)
+
