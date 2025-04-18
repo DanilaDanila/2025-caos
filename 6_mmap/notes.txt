@@ -1,0 +1,78 @@
+
+
+int a = 10;
+
+int *p = &a;
+p --> <физический сегмент>  <-- не происходит
+
+0b0101001...1011 - 64bit
+
+9bit_9bit_9bit_9
+27bit 
+
+p4 = registers[cr3]
+p3 = p4[ &a[0-8bit] ]
+p2 = p3[ &a[9-17bit] ]
+p1 = p2[ &a[18-26bit] ]
+page = p1[ &a[27-35bit] ]
+
+pX = 0b?????0...000000 - 12 нулей
+            e   ??  wr
+
+
+uint32_t arr[15];
+
+( (void*)(arr + 10) - (void*)(arr + 4) )
+    % 
+    sizeof(uint32_t)
+
+
+// 4096=1024 * 4 = 2^10 * 2^2 = 2^12
+page[ &a[last 12bit] ] --> a_value
+
+
+
+P4 > P3 > P2 > P1 > PAGE
+          !W -> W => W
+
+
+uint64_t *arr = malloc(4096);
+arr = realloc(arr, 3 * 4096);
+
+arr[last 12 bits] --> адрес в странице памяти
+
+
+p1_index = arr[20...12 bits]
+p1_index -- смещение в таблице P1
+
+P1[p1_index + 1] -- занят ли?
+P1[p1_index + 2] -- занят ли?
+
+если заняты
+
+new_p1_index = find_3_free(P1)
+
+new_P1 = P2[new_p2_index]
+new_P1[0] = arr[last 12 bits]
+new_P1[1] = alloc_new_page()
+new_P2[2] = alloc_new_page()
+
+arr[20...12 bits] - new_p1
+
+// NxN
+float **a = ...;
+float **b = ...;
+float **c = ...;
+
+
+a[I][k] * b[k][J]
+
+aik = a + I * N + k
+bkj = b + k * N + J
+...
+(void*)aik + 4
+(void*)bkj + 4 // не правда
+(void*)bkj + >20
+
+
+
