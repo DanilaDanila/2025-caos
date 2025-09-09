@@ -17,9 +17,14 @@ enableEmoji: true
     "communication_policy": "24 / 7 / 365",
     "work-experience": [
         {
-            "name": "Яндекс",
+            "name": "Парттайм + контракт",
             "major": "backend Python / C++",
             "is_active": true,
+        },
+        {
+            "name": "Яндекс",
+            "major": "backend Python / C++",
+            "is_active": false,
         },
         {
             "name": "Anabar",
