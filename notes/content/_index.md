@@ -3,7 +3,7 @@ title: Introduction
 type: docs
 ---
 
-# АКОС 2025 (blockchain)
+# АКОС 2025
 
 
 ## А где я?...
@@ -24,7 +24,7 @@ type: docs
 
 ## Просто ссылка на github
 
-- [2025-caos-blockchain](https://github.com/DanilaDanila/2025-caos-blockchain/tree/master)
+- [2025-caos](https://github.com/DanilaDanila/2025-caos/tree/master)
 
 
 ## Ссылочки на презенташки
@@ -62,5 +62,5 @@ type: docs
 
 Если чешутся руки - у вас целых два путя))
 
-{{<button href="https://github.com/DanilaDanila/2025-caos-blockchain/issues/new?assignees=&labels=&projects=&template=%D1%85%D0%BE%D1%87%D1%83--%D1%87%D1%82%D0%BE%D0%B1-%D0%B7%D0%B0-%D0%BC%D0%B5%D0%BD%D1%8F-%D0%BA%D1%82%D0%BE-%D0%BD%D0%B8%D0%B1%D1%83%D0%B4%D1%8C-%D0%BF%D0%BE%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB-%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D1%83.md&title=">}}я нашел ошибку{{</button>}}
+{{<button href="https://github.com/DanilaDanila/2025-caos/issues/new?assignees=&labels=&projects=&template=%D1%85%D0%BE%D1%87%D1%83--%D1%87%D1%82%D0%BE%D0%B1-%D0%B7%D0%B0-%D0%BC%D0%B5%D0%BD%D1%8F-%D0%BA%D1%82%D0%BE-%D0%BD%D0%B8%D0%B1%D1%83%D0%B4%D1%8C-%D0%BF%D0%BE%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB-%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D1%83.md&title=">}}я нашел ошибку{{</button>}}
 {{<button href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request">}}я хочу что-то дополнить{{</button>}}
