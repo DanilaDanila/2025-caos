@@ -1,0 +1,30 @@
+
+struct data_t {
+    int n;
+    uint32_t *array;
+};
+
+struct data_t my_data;
+
+uint32_t eleventh = my_data.array[11];
+
+// my_data.array
+&my_data + offset(data_t, "array")
+
+int index = 11;
+(void*)(&my_data + offset(data_t, "array")) + index * sizeof(uint32_t)
+
+rbx := &my_data
+rcx := 11
+mov rax, [rbx + rcx * 4 + offset(data_t, "array")]
+
+uint32_t eleventh = my_data.array[11];
+
+
+
+
+
+
+
+
+

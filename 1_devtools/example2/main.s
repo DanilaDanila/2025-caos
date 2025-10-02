@@ -2,9 +2,11 @@
 	.text
 	.section	.rodata
 .LC0:
-	.string	"Usage:\n\t%s <name>\n"
+	.string	"%d"
 .LC1:
-	.string	"Hello, %s\n"
+	.string	"Your age %d\n"
+.LC3:
+	.string	"pi = %f\n"
 	.text
 	.globl	main
 	.type	main, @function
@@ -17,29 +19,35 @@ main:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 	subq	$16, %rsp
-	movl	%edi, -4(%rbp)
-	movq	%rsi, -16(%rbp)
-	cmpl	$2, -4(%rbp)
-	je	.L2
-	movq	-16(%rbp), %rax
-	movq	(%rax), %rax
+	movq	%fs:40, %rax
+	movq	%rax, -8(%rbp)
+	xorl	%eax, %eax
+	leaq	-12(%rbp), %rax
 	leaq	.LC0(%rip), %rdx
 	movq	%rax, %rsi
 	movq	%rdx, %rdi
 	movl	$0, %eax
-	call	_Z6printfPKcz@PLT
-	movl	$1, %eax
-	jmp	.L3
-.L2:
-	movq	-16(%rbp), %rax
-	addq	$8, %rax
-	movq	(%rax), %rax
+	call	__isoc23_scanf@PLT
+	movl	-12(%rbp), %eax
+	movl	$5, %edx
+	cmpl	%edx, %eax
+	cmovl	%edx, %eax
 	leaq	.LC1(%rip), %rdx
-	movq	%rax, %rsi
+	movl	%eax, %esi
 	movq	%rdx, %rdi
 	movl	$0, %eax
 	call	_Z6printfPKcz@PLT
+	movq	.LC2(%rip), %rax
+	leaq	.LC3(%rip), %rdx
+	movq	%rax, %xmm0
+	movq	%rdx, %rdi
+	movl	$1, %eax
+	call	_Z6printfPKcz@PLT
 	movl	$0, %eax
+	movq	-8(%rbp), %rdx
+	subq	%fs:40, %rdx
+	je	.L3
+	call	__stack_chk_fail@PLT
 .L3:
 	leave
 	.cfi_def_cfa 7, 8
@@ -47,5 +55,10 @@ main:
 	.cfi_endproc
 .LFE0:
 	.size	main, .-main
+	.section	.rodata
+	.align 8
+.LC2:
+	.long	-1065151889
+	.long	1074340298
 	.ident	"GCC: (GNU) 15.2.1 20250813"
 	.section	.note.GNU-stack,"",@progbits
